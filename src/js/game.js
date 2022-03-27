@@ -60,7 +60,7 @@ class Player {
         else
             this.Title = FemaleTitles[titleLevel];
 
-        this.Treasury = 1000;
+            this.Treasury = 1000;
         // this.WhichPlayer = _city;
         this.Year = _year;
         this.YearOfDeath = _year + 20 + Random(35);        
@@ -77,11 +77,12 @@ class Game {
 }
 
 // GAME STATE
-var level;          // difficulty level
-var playerName;     // player name
-var isPlayerMale;   // is player male?
-var player;         // player object (from Player class)
-var game;           // game object (from Game class)
+var level;                  // difficulty level
+var playerName;             // player name
+var isPlayerMale;           // is player male?
+var player;                 // player object (from Player class)
+var game;                   // game object (from Game class)
+var populationMessages = [] // list of messages concerning population on the current turn
 
 // GAME FUNCTIONS
 
@@ -193,6 +194,141 @@ const SellLand = function(player, amount) {
     player.Land -= amount;
 }
 
+const SerfsDecomposing = function (player, MyScale) {
+    var absc = Math.round(MyScale);
+    var ord = MyScale-absc;
+
+    player.DeadSerfs = Math.round((((Random(absc) + ord) * player.Serfs) / 100.0));
+    player.Serfs -= player.DeadSerfs;
+
+    return `${player.NewSerfs} serfs died this year.`;
+}
+
+const SerfsProcreating = function(player, MyScale) {
+    var absc = Math.round(MyScale);
+    var ord = MyScale-absc;
+
+    player.NewSerfs = Math.round((((Random(absc) + ord) * player.Serfs) / 100.0));
+    player.Serfs += player.NewSerfs;
+
+    return `${player.NewSerfs} serfs born this year.`;
+}
+
+// releases grain, calculates consequences, and returns array of message strings
+const ReleaseGrain = function(player, HowMuch) {
+    var xp, zp;
+    var x, z;
+    const messages = [];
+
+    player.SoldierPay = player.MarketRevenue = player.NewSerfs = player.DeadSerfs = 0;
+    player.TransplantedSerfs = player.FleeingSerfs = 0;
+    player.InvadeMe = false;
+    player.GrainReserve -= HowMuch;
+    z = HowMuch / player.GrainDemand - 1.0;
+
+    if (z > 0.0)
+        z /= 2.0;
+    if (z > 0.25)
+        z = z / 10.0 + 0.25;
+
+    zp = 50.0 - player.CustomsDuty - player.SalesTax - player.IncomeTax;
+
+    if (zp < 0.0)
+        zp *= player.Justice;
+    zp /= 10.0;
+
+    if (zp > 0.0)
+        zp += (3.0 - player.Justice);
+
+    z += (zp / 10.0);
+
+    if (z > 0.5)
+        z = 0.5;
+
+    if (HowMuch < (player.GrainDemand - 1)) {
+        x = (player.GrainDemand - HowMuch) / player.GrainDemand * 100.0 - 9.0;
+        xp = x;
+
+        if (x > 65.0)
+            x = 65.0;
+
+        if (x < 0.0) {
+            xp = 0.0;
+            x = 0.0;
+        }
+
+        messages.push(SerfsProcreating(player, 3.0));
+        messages.push(SerfsDecomposing(player, xp + 8.0));
+    } else {
+        messages.push(SerfsProcreating(player, 7.0));
+        messages.push(SerfsDecomposing(player, 3.0));
+
+        if ((player.CustomsDuty + player.SalesTax) < 35)
+            player.Merchants += Random(4);
+
+        if (player.IncomeTax < Random(28)) {
+            player.Nobles += Random(2);
+            player.Clergy += Random(3);
+        }
+
+        if (HowMuch > Math.round((player.GrainDemand * 1.3))) {
+            zp = player.Serfs / 1000.0;
+            z = (HowMuch - (player.GrainDemand)) / player.GrainDemand * 10.0;
+            z *= (zp * Random(25));
+            z += Random(40);
+            player.TransplantedSerfs = Math.round(z);
+            player.Serfs += player.TransplantedSerfs;
+            messages.push(`${player.TransplantedSerfs} serfs move to the city`);
+            zp = z;
+            z = (zp * Random(100)) / 100;
+            if (z > 50.0)
+                z = 50.0;
+            player.Merchants += Math.round(z);
+            player.Nobles++;
+            player.Clergy += 2;
+        }
+    }
+
+    if (player.Justice > 2) {
+        player.JusticeRevenue = player.Serfs / 100 * (player.Justice - 2) * (player.Justice - 2);
+        player.JusticeRevenue = Random(player.JusticeRevenue);
+        player.Serfs -= player.JusticeRevenue;
+        player.FleeingSerfs = player.JusticeRevenue;
+        messages.push(`${player.FleeingSerfs} serfs flee harsh justice`);
+    }
+
+    player.MarketRevenue = player.Marketplaces * 75;
+    if (player.MarketRevenue > 0) {
+        player.Treasury += player.MarketRevenue;
+        messages.push(`Your market earned ${player.MarketRevenue} florins`);
+    }
+
+    player.MillRevenue = player.Mills * (55 + Random(250));
+    if (player.MillRevenue > 0) {
+        player.Treasury += player.MillRevenue;
+        messages.push(`Your woolen mill earned ${player.MillRevenue} florins`);
+    }
+
+    player.SoldierPay = player.Soldiers * 3;
+    player.Treasury -= player.SoldierPay;
+
+    messages.push(`You paid your soldiers ${player.SoldierPay} florins`);
+    messages.push(`You have ${player.Serfs}  serfs in your city.`);
+
+    if ((player.Land / 1000) > player.Soldiers) {
+        player.InvadeMe = true;
+    }
+
+    if ((player.Land / 500) > player.Soldiers) {
+        player.InvadeMe = true;
+    }
+    
+    return messages;
+}
+
+const setPopulationMessages = function(messages) {
+    populationMessages = messages;
+}
 
 const newTurn = function() {
     // GenerateHarvest(player);
@@ -203,6 +339,7 @@ const newTurn = function() {
         // screen buySellGrain
 
     // ReleaseGrain(Me);
+        // screen ReleaseGrain
 
     // if (player.InvadeMe) {
     //     int i;
@@ -233,6 +370,7 @@ const newTurn = function() {
 // UI FUNCTIONS
 
 // UI controls
+var playerStatus = document.getElementById("playerStatus");
 var images = document.getElementById("images"); 
 var text = document.getElementById("text"); 
 var buttonBox = document.getElementById('buttonBox');
@@ -290,9 +428,19 @@ const preprocess = function(fn) {
     }
 }
 
+const updatePlayerStatus = function() {
+    if (player !== null && player !== undefined) {
+        playerStatus.innerHTML = `
+        <table>
+        <tr><td>${player.Title} ${player.Name} of ${player.City}</td>   <td align=right>Year ${player.Year}</td></tr>
+        </table>`
+    }
+}
+
 // advance to a next screen s
 const advanceTo = function(s) {
   preprocess(s.preprocess);
+  updatePlayerStatus();
   changeImage(s.image);
   changeText(s.text);
   changeButtons(s.buttons);
@@ -319,7 +467,6 @@ const screenBuySellGrainText = function() {
     const harvestMsg = printHarvestMsg(player);
     return `
     <table>
-    <tr><td>${player.Title} ${player.Name} of ${player.City}</td>   <td align=right>Year ${player.Year}</td></tr>
     <tr><td colspan=2>Rats ate ${player.Rats}% of your grain reserves.</td></tr>
     <tr><td colspan=2>${harvestMsg} (${player.RatsAte} steres).</td></tr>
     </table>
@@ -337,10 +484,6 @@ const screenBuySellGrainText = function() {
 
 const screenBuyGrainText = function() {
     return `
-    <table>
-    <tr><td>${player.Title} ${player.Name} of ${player.City}</td>   <td align=right>Year ${player.Year}</td></tr>
-    </table>
-    &nbsp;<br>
     <table>
     <tr valign=bottom><td>Grain Reserve</td> <td>Grain Demand</td> <td>Price of Grain</td> <td>Treasury</td></tr>  
     <tr valign=top><td>${player.GrainReserve.toFixed(0)} steres</td> <td>${player.GrainDemand} steres</td> <td>${player.GrainPrice.toFixed(2)} per 1000 st.</td>  <td>${player.Treasury.toFixed(2)} gold florins</td></tr>
@@ -362,10 +505,6 @@ const buyGrain = function (value) {
 const screenSellGrainText = function() {
     return `
     <table>
-    <tr><td>${player.Title} ${player.Name} of ${player.City}</td>   <td align=right>Year ${player.Year}</td></tr>
-    </table>
-    &nbsp;<br>
-    <table>
     <tr valign=bottom><td>Grain Reserve</td> <td>Grain Demand</td> <td>Price of Grain</td> <td>Treasury</td></tr>  
     <tr valign=top><td>${player.GrainReserve.toFixed(0)} steres</td> <td>${player.GrainDemand} steres</td> <td>${player.GrainPrice.toFixed(2)} per 1000 st.</td>  <td>${player.Treasury.toFixed(2)} gold florins</td></tr>
     </table>
@@ -384,12 +523,7 @@ const sellGrain = function (value) {
 }
 
 const screenBuyLandText = function() {
-    const harvestMsg = printHarvestMsg(player);
     return `
-    <table>
-    <tr><td>${player.Title} ${player.Name} of ${player.City}</td>   <td align=right>Year ${player.Year}</td></tr>
-    </table>
-    &nbsp;<br>
     <table>
     <tr valign=bottom><td>Price of Land</td> <td>Treasury</td></tr>  
     <tr valign=top><td>${player.LandPrice.toFixed(2)} hectare</td> <td>${player.Treasury.toFixed(2)} gold florins</td></tr>
@@ -413,12 +547,7 @@ const buyLand = function (value) {
 }
 
 const screenSellLandText = function() {
-    const harvestMsg = printHarvestMsg(player);
     return `
-    <table>
-    <tr><td>${player.Title} ${player.Name} of ${player.City}</td>   <td align=right>Year ${player.Year}</td></tr>
-    </table>
-    &nbsp;<br>
     <table>
     <tr valign=bottom><td>Price of Land</td> <td>Treasury</td></tr>  
     <tr valign=top><td>${player.LandPrice.toFixed(2)} hectare</td> <td>${player.Treasury.toFixed(2)} gold florins</td></tr>
@@ -440,6 +569,55 @@ const sellLand = function (value) {
         showError("You can't sell that much.");
     }
 }
+
+const screenReleaseGrainText = function() {
+    return `
+    <table>
+    <tr valign=bottom><td>Grain Reserve</td> <td>Grain Demand</td> </tr>  
+    <tr valign=top><td>${player.GrainReserve.toFixed(0)} steres</td> <td>${player.GrainDemand} steres</td> </tr>
+    </table>
+    &nbsp;<br>
+    How much grain will you release for consumption?
+    `;
+}
+
+const releaseMinGrain = function() {
+    const Minimum = player.GrainReserve / 5;
+    setPopulationMessages(ReleaseGrain(player, Minimum));
+}
+
+const releaseMaxGrain = function() {
+    const Minimum = player.GrainReserve / 5;
+    const Maximum = (player.GrainReserve - Minimum);
+    setPopulationMessages(ReleaseGrain(player, Maximum));
+}
+
+const releaseGrainAmount = function(HowMuch) {
+    const Minimum = player.GrainReserve / 5;
+    const Maximum = (player.GrainReserve - Minimum);
+
+    if (HowMuch < Minimum) {
+        showError("You must release at least 20% of your reserves.");
+        advanceTo(screens.releaseGrain);
+    } else if (HowMuch > Maximum) {
+        showError("You must keep at least 20%.");
+        advanceTo(screens.releaseGrain);
+    } else {
+        setPopulationMessages(ReleaseGrain(player, HowMuch));
+        advanceTo(screens.population);
+    }
+}
+
+const screenPopulationText = function() {
+    var screen = `
+    <table>`;
+    populationMessages.forEach((msg) => {
+        screen += `<tr><td>${msg}</td></tr>`;
+    });
+    screen += "</table>";
+    return screen;
+}
+
 
 // content of the different game screens
 const screens = {
@@ -499,12 +677,12 @@ const screens = {
     preprocess: "prepareBuySellGrain()",
     image: "./img/farm.svg",
     text: () => screenBuySellGrainText(),
-    buttons: [["Buy grain", "advanceTo(screens.buyGrain)"], ["Sell grain", "advanceTo(screens.sellGrain)"], ["Buy land", "advanceTo(screens.buyLand)"], ["Sell land", "advanceTo(screens.sellLand)"], ["Continue", ""]]
+    buttons: [["Buy grain", "advanceTo(screens.buyGrain)"], ["Sell grain", "advanceTo(screens.sellGrain)"], ["Buy land", "advanceTo(screens.buyLand)"], ["Sell land", "advanceTo(screens.sellLand)"], ["Continue", "advanceTo(screens.releaseGrain)"]]
   },
   buySellGrain: {
       image: "./img/farm.svg",
       text: () => screenBuySellGrainText(),
-      buttons: [["Buy grain", "advanceTo(screens.buyGrain)"], ["Sell grain", "advanceTo(screens.sellGrain)"], ["Buy land", "advanceTo(screens.buyLand)"], ["Sell land", "advanceTo(screens.sellLand)"], ["Continue", ""]]
+      buttons: [["Buy grain", "advanceTo(screens.buyGrain)"], ["Sell grain", "advanceTo(screens.sellGrain)"], ["Buy land", "advanceTo(screens.buyLand)"], ["Sell land", "advanceTo(screens.sellLand)"], ["Continue", "advanceTo(screens.releaseGrain)"]]
   },
   buyGrain: {
     image: "./img/warehouse.svg",
@@ -526,16 +704,31 @@ const screens = {
     text: () => screenSellLandText(),
     inputText: "actionAndAdvanceTo(sellLand(input.value),screens.buySellGrain)"
   },
-  
+  releaseGrain: {
+    image: "./img/tavern.svg",
+    text: () => screenReleaseGrainText(),
+    buttons: [["Minimum", "actionAndAdvanceTo(releaseMinGrain(),screens.population)"], ["Maximum", "actionAndAdvanceTo(releaseMaxGrain(),screens.population)"], ["Choose an amount", "advanceTo(screens.releaseGrainAmount)"]]
+  },
+  releaseGrainAmount: {
+    image: "./img/tavern.svg",
+    text: () => screenReleaseGrainText(),
+    inputText: "releaseGrainAmount(input.value)"
+  },
+  population: {
+    image: "./img/village.svg",
+    text: () => screenPopulationText(),
+    buttons: [["Continue", "advanceTo(screens.newTurn)"]]
+  },
+
 };
 
 // start game
 input.hidden = true;
-//advanceTo(screens.start);
+advanceTo(screens.start);
 
 //TEMP
-setDifficulty(1);
-setRulerName("Rodrigo Borgia");
-setRulerIsMale(true);
-initializePlayer();
-advanceTo(screens.areYouReady);
+// setDifficulty(1);
+// setRulerName("Rodrigo Borgia");
+// setRulerIsMale(true);
+// initializePlayer();
+// advanceTo(screens.areYouReady);
