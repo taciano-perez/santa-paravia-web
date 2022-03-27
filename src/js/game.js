@@ -1,11 +1,9 @@
 /*
 Santa Paravia e Fiumaccio
-
-The original BASIC game for the TRS-80 was created by George Blank (1979)
+-------------------------
+The original BASIC game for the TRS-80 was created by George Blank (1978)
 This JS implementation by Taciano Dreckmann Perez (2022) is based on the
 C implementation by Thomas Knox (2000)
-
-
 */
 
 // CONVENIENCE FUNCTIONS
@@ -18,12 +16,17 @@ const Random = function(max) {
     return Math.floor(Math.random() * max+1);
 }
 
+const showError = function(msg) {
+    alert(msg);
+}
+
 // GAME CONSTANTS & CLASSES
+CityList = ["Santa Paravia", "Fiumaccio", "Torricella", "Molinetto", "Fontanile", "Romanga", "Monterana"];
 MaleTitles = ["Sir", "Baron", "Count", "Marquis", "Duke", "Grand Duke", "Prince", "* H.R.H. King"];
 FemaleTitles = ["Lady","Baroness","Countess", "Marquise","Duchess", "Grand Duchess", "Princess", "* H.R.H. Queen"];
 
 class Player {
-    constructor(_year, _city, _name, _isMale) {
+    constructor(_year, _city, _name, _isMale, titleLevel) {
         this.Cathedral = 0;
         this.City = _city;
         this.Clergy = 5;
@@ -53,13 +56,10 @@ class Player {
         this.TitleNum = 1;
     
         if (this.MaleOrFemale == true)
-            this.Title = MaleTitles[0];
+            this.Title = MaleTitles[titleLevel];
         else
-            this.Title, FemaleTitles[0];
-    
-        // if (city == 6)
-        //     strcpy(this.Title, "Baron");
-    
+            this.Title = FemaleTitles[titleLevel];
+
         this.Treasury = 1000;
         // this.WhichPlayer = _city;
         this.Year = _year;
@@ -67,10 +67,21 @@ class Player {
     }
 }
 
+class Game {
+    constructor() {
+        this.AllDead = false;
+        this.Winner = false;
+        this.WinningPlayer = 0;
+        this.Baron = new Player(1400, CityList[6], "Peppone", 1);
+    }
+}
+
 // GAME STATE
 var level;          // difficulty level
 var playerName;     // player name
 var isPlayerMale;   // is player male?
+var player;         // player object (from Player class)
+var game;           // game object (from Game class)
 
 // GAME FUNCTIONS
 
@@ -89,13 +100,143 @@ const setRulerIsMale = function(isMale) {
     debug("Player Is Male set to " + isMale);
 }
 
+const initializePlayer = function() {
+    player = new Player(1400, "Santa Paravia", playerName, isPlayerMale, 0);
+}
+
+const initializeGame = function() {
+    game = new Game();
+}
+
+const GenerateHarvest = function(player) {
+    player.Harvest = Math.floor((Random(5) + Random(6)) / 2);
+    player.Rats = Random(50);
+    player.GrainReserve = ((player.GrainReserve * 100) - (player.GrainReserve * player.Rats)) / 100;
+}
+
+const NewLandAndGrainPrices = function(player) {
+    x = player.Land;
+    y = ((player.Serfs - player.Mills) * 100.0) * 5.0;
+
+    if (y < 0.0)
+        y = 0.0;
+
+    if (y < x)
+        x = y;
+
+    y = player.GrainReserve * 2.0;
+    if (y < x)
+        x = y;
+
+    y = player.Harvest + (Random(1) - 0.5);
+    h = Math.round(x * y);
+    player.GrainReserve += h;
+    player.GrainDemand = (player.Nobles * 100) + (player.Cathedral * 40) + (player.Merchants * 30);
+    player.GrainDemand += ((player.Soldiers * 10) + (player.Serfs * 5));
+    player.LandPrice = (3.0 * player.Harvest + Random(6) + 10.0) / 10.0;
+
+    if (h < 0)
+        h *= -1;
+    if (h < 1)
+        y = 2.0;
+    else {
+        y = (player.GrainDemand / h);
+        if (y > 2.0)
+            y = 2.0;
+    }
+
+    if (y < 0.8)
+        y = 0.8;
+
+    player.LandPrice *= y;
+
+    if (player.LandPrice < 1.0)
+        player.LandPrice = 1.0;
+
+    player.GrainPrice = (((6.0 - player.Harvest) * 3.0 + Random(5) + Random(5)) * 4.0 * y);
+    player.RatsAte = h;
+}
+
+const printHarvestMsg = function(player) {
+    switch (player.Harvest) {
+        case 0: return "";
+        case 1: return "Drought. Famine threatens ";
+        case 2: return "Bad weather. Poor harvest ";
+        case 3: return "Normal weather. Average harvest ";
+        case 4: return "Good weather. Fine harvest ";
+        case 5: return "Excellent weather. Great harvest ";
+    }
+}
+
+const prepareBuySellGrain = function() {
+    GenerateHarvest(player);
+    NewLandAndGrainPrices(player);
+}
+
+const BuyGrain = function(player, amount) {
+    player.Treasury -= (amount * player.GrainPrice / 1000);
+    player.GrainReserve += amount;
+}
+
+const SellGrain = function(player, amount) {
+    player.Treasury += (amount * player.GrainPrice / 1000);
+    player.GrainReserve -= amount;
+}
+
+const BuyLand = function(player, amount) {
+    player.Treasury -= (amount * player.LandPrice);
+    player.Land += amount;
+}
+
+const SellLand = function(player, amount) {
+    player.Treasury += (amount * player.LandPrice);
+    player.Land -= amount;
+}
+
+
+const newTurn = function() {
+    // GenerateHarvest(player);
+    // NewLandAndGrainPrices(player);
+        // ---> prepareBuySellGrain()
+
+    BuySellGrain(player);
+        // screen buySellGrain
+
+    // ReleaseGrain(Me);
+
+    // if (player.InvadeMe) {
+    //     int i;
+    //     for (i = 0; i < HowMany; i++) {
+    //         if (i != player.WhichPlayer)
+    //             if (MyPlayers[i].Soldiers > (player.Soldiers * 2.4)) {
+    //                 AttackNeighbor(&MyPlayers[i], Me);
+    //                 i = 9;
+    //             }
+    //     }
+
+    //     if (i != 9)
+    //         AttackNeighbor(Baron, Me);
+    // }
+
+    // AdjustTax(Me);
+    // DrawMap(Me);
+    // StatePurchases(Me, HowMany, MyPlayers);
+    // CheckNewTitle(Me);
+
+    // player.Year++;
+    // if (player.Year == player.YearOfDeath)
+    //     ImDead(Me);
+    // if (player.TitleNum >= 7)
+    //     player.IWon = true;    
+}
+
 // UI FUNCTIONS
 
 // UI controls
 var images = document.getElementById("images"); 
 var text = document.getElementById("text"); 
 var buttonBox = document.getElementById('buttonBox');
-var input = document.getElementById('input');
+var input = document.getElementById('inputText');
 
 // updates text based on the current screen
 const changeText = function(words) {
@@ -129,6 +270,7 @@ const changeButtons = function(buttonList) {
 // gets input text and then executes an action
 const getInputText = function(action) {
     if (action !== null && action !== undefined) {
+        input.value = "";   // clear field
         const listener = function(event) {
             if (event.key == "Enter" || event.keyCode == 13) {
                 debug("INPUT: " + input.value);
@@ -142,12 +284,19 @@ const getInputText = function(action) {
     }
 }
 
+const preprocess = function(fn) {
+    if (fn !== null && fn !== undefined) {
+        eval(fn);
+    }
+}
+
 // advance to a next screen s
 const advanceTo = function(s) {
-  changeImage(s.image)
-  changeText(s.text)
-  changeButtons(s.buttons)
-  getInputText(s.inputText)
+  preprocess(s.preprocess);
+  changeImage(s.image);
+  changeText(s.text);
+  changeButtons(s.buttons);
+  getInputText(s.inputText);
 };
 
 // execute action a and then advance to screen s
@@ -159,8 +308,137 @@ const actionAndAdvanceTo = function (a, s) {
 // GAME SCREENS
 
 const screenRulerGenderText = function() {
-    debug("replacing...")
     return "Is %s male or female?".replace("%s", playerName)
+}
+
+const screenAreYouReadyText = function() {
+    return "%s, are you ready to rule Santa Paravia?".replace("%s", player.Title + " " + player.Name);
+}
+
+const screenBuySellGrainText = function() {
+    const harvestMsg = printHarvestMsg(player);
+    return `
+    <table>
+    <tr><td>${player.Title} ${player.Name} of ${player.City}</td>   <td align=right>Year ${player.Year}</td></tr>
+    <tr><td colspan=2>Rats ate ${player.Rats}% of your grain reserves.</td></tr>
+    <tr><td colspan=2>${harvestMsg} (${player.RatsAte} steres).</td></tr>
+    </table>
+    &nbsp;<br>
+    <table>
+    <tr valign=bottom><td>Grain Reserve</td> <td>Grain Demand</td> <td>Price of Grain</td> <td>Price of Land</td> <td>Treasury</td></tr>  
+    <tr valign=top><td>${player.GrainReserve.toFixed(0)} steres</td> <td>${player.GrainDemand} steres</td> <td>${player.GrainPrice.toFixed(2)} per 1000 st.</td> <td>${player.LandPrice.toFixed(2)} hectare</td> <td>${player.Treasury.toFixed(2)} gold florins</td></tr>
+    </table>
+    &nbsp;<br>
+    <table>
+    <tr><td>You have ${player.Land} hectares of land.</td></tr>
+    </table>
+    `;
+}
+
+const screenBuyGrainText = function() {
+    return `
+    <table>
+    <tr><td>${player.Title} ${player.Name} of ${player.City}</td>   <td align=right>Year ${player.Year}</td></tr>
+    </table>
+    &nbsp;<br>
+    <table>
+    <tr valign=bottom><td>Grain Reserve</td> <td>Grain Demand</td> <td>Price of Grain</td> <td>Treasury</td></tr>  
+    <tr valign=top><td>${player.GrainReserve.toFixed(0)} steres</td> <td>${player.GrainDemand} steres</td> <td>${player.GrainPrice.toFixed(2)} per 1000 st.</td>  <td>${player.Treasury.toFixed(2)} gold florins</td></tr>
+    </table>
+    &nbsp;<br>
+    How much grain do you want to buy?
+    `;
+}
+
+const buyGrain = function (value) {
+    var amount = parseInt(value);
+    if (amount >= 0 && amount <= player.GrainReserve) {
+        BuyGrain(player, amount);
+    } else {
+        showError("Invalid amount.");
+    }
+}
+
+const screenSellGrainText = function() {
+    return `
+    <table>
+    <tr><td>${player.Title} ${player.Name} of ${player.City}</td>   <td align=right>Year ${player.Year}</td></tr>
+    </table>
+    &nbsp;<br>
+    <table>
+    <tr valign=bottom><td>Grain Reserve</td> <td>Grain Demand</td> <td>Price of Grain</td> <td>Treasury</td></tr>  
+    <tr valign=top><td>${player.GrainReserve.toFixed(0)} steres</td> <td>${player.GrainDemand} steres</td> <td>${player.GrainPrice.toFixed(2)} per 1000 st.</td>  <td>${player.Treasury.toFixed(2)} gold florins</td></tr>
+    </table>
+    &nbsp;<br>
+    How much grain do you want to sell?
+    `;
+}
+
+const sellGrain = function (value) {
+    var amount = parseInt(value);
+    if (amount >= 0 && amount <= player.GrainReserve) {
+        SellGrain(player, amount);
+    } else {
+        showError("You don't have it.");
+    }
+}
+
+const screenBuyLandText = function() {
+    const harvestMsg = printHarvestMsg(player);
+    return `
+    <table>
+    <tr><td>${player.Title} ${player.Name} of ${player.City}</td>   <td align=right>Year ${player.Year}</td></tr>
+    </table>
+    &nbsp;<br>
+    <table>
+    <tr valign=bottom><td>Price of Land</td> <td>Treasury</td></tr>  
+    <tr valign=top><td>${player.LandPrice.toFixed(2)} hectare</td> <td>${player.Treasury.toFixed(2)} gold florins</td></tr>
+    </table>
+    &nbsp;<br>
+    <table>
+    <tr><td>You have ${player.Land} hectares of land.</td></tr>
+    </table>
+    &nbsp;<br>
+    How much land do you want to buy?
+    `;
+}
+
+const buyLand = function (value) {
+    var amount = parseInt(value);
+    if (amount >= 0 && amount <= (player.Treasury / player.LandPrice)) {
+        BuyLand(player, amount);
+    } else {
+        showError("Invalid amount.");
+    }
+}
+
+const screenSellLandText = function() {
+    const harvestMsg = printHarvestMsg(player);
+    return `
+    <table>
+    <tr><td>${player.Title} ${player.Name} of ${player.City}</td>   <td align=right>Year ${player.Year}</td></tr>
+    </table>
+    &nbsp;<br>
+    <table>
+    <tr valign=bottom><td>Price of Land</td> <td>Treasury</td></tr>  
+    <tr valign=top><td>${player.LandPrice.toFixed(2)} hectare</td> <td>${player.Treasury.toFixed(2)} gold florins</td></tr>
+    </table>
+    &nbsp;<br>
+    <table>
+    <tr><td>You have ${player.Land} hectares of land.</td></tr>
+    </table>
+    &nbsp;<br>
+    How much land do you want to sell?
+    `;
+}
+
+const sellLand = function (value) {
+    var amount = parseInt(value);
+    if (amount >= 0 && amount <= player.Land) {
+        SellLand(player, amount);
+    } else {
+        showError("You can't sell that much.");
+    }
 }
 
 // content of the different game screens
@@ -212,12 +490,52 @@ const screens = {
               ["Female", "actionAndAdvanceTo(setRulerIsMale(false),screens.areYouReady)"]]
   },
   areYouReady: {
-      text: "Are you ready to start?",
-      buttons: [["Yes!", ""]]
-  }
+      preprocess: "initializePlayer()",
+      image: "./img/round-tower-with-flag.svg",
+      text: () => screenAreYouReadyText(),
+      buttons: [["Yes!", "actionAndAdvanceTo(initializeGame(),screens.newTurn)"], ["Wait, let me think again...", "advanceTo(screens.start)"]]
+  },
+  newTurn: {
+    preprocess: "prepareBuySellGrain()",
+    image: "./img/farm.svg",
+    text: () => screenBuySellGrainText(),
+    buttons: [["Buy grain", "advanceTo(screens.buyGrain)"], ["Sell grain", "advanceTo(screens.sellGrain)"], ["Buy land", "advanceTo(screens.buyLand)"], ["Sell land", "advanceTo(screens.sellLand)"], ["Continue", ""]]
+  },
+  buySellGrain: {
+      image: "./img/farm.svg",
+      text: () => screenBuySellGrainText(),
+      buttons: [["Buy grain", "advanceTo(screens.buyGrain)"], ["Sell grain", "advanceTo(screens.sellGrain)"], ["Buy land", "advanceTo(screens.buyLand)"], ["Sell land", "advanceTo(screens.sellLand)"], ["Continue", ""]]
+  },
+  buyGrain: {
+    image: "./img/warehouse.svg",
+    text: () => screenBuyGrainText(),
+    inputText: "actionAndAdvanceTo(buyGrain(input.value),screens.buySellGrain)"
+  },
+  sellGrain: {
+    image: "./img/warehouse.svg",
+    text: () => screenSellGrainText(),
+    inputText: "actionAndAdvanceTo(sellGrain(input.value),screens.buySellGrain)"
+  },
+  buyLand: {
+    image: "./img/scroll.svg",
+    text: () => screenBuyLandText(),
+    inputText: "actionAndAdvanceTo(buyLand(input.value),screens.buySellGrain)"
+  },
+  sellLand: {
+    image: "./img/scroll.svg",
+    text: () => screenSellLandText(),
+    inputText: "actionAndAdvanceTo(sellLand(input.value),screens.buySellGrain)"
+  },
   
 };
 
 // start game
 input.hidden = true;
-advanceTo(screens.start);
+//advanceTo(screens.start);
+
+//TEMP
+setDifficulty(1);
+setRulerName("Rodrigo Borgia");
+setRulerIsMale(true);
+initializePlayer();
+advanceTo(screens.areYouReady);
