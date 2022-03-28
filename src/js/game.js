@@ -26,9 +26,9 @@ MaleTitles = ["Sir", "Baron", "Count", "Marquis", "Duke", "Grand Duke", "Prince"
 FemaleTitles = ["Lady","Baroness","Countess", "Marquise","Duchess", "Grand Duchess", "Princess", "* H.R.H. Queen"];
 
 class Player {
-    constructor(_year, _city, _name, _isMale, titleLevel) {
+    constructor(_year, cityIndex, _name, _isMale, titleLevel) {
         this.Cathedral = 0;
-        this.City = _city;
+        this.City = CityList[cityIndex];
         this.Clergy = 5;
         this.CustomsDuty = 25;
         this.Difficulty = level;
@@ -61,9 +61,19 @@ class Player {
             this.Title = FemaleTitles[titleLevel];
 
             this.Treasury = 1000;
-        // this.WhichPlayer = _city;
+        this.WhichPlayer = cityIndex;
         this.Year = _year;
         this.YearOfDeath = _year + 20 + Random(35);        
+    }
+    justiceAsString() {
+        switch(this.Justice) {
+            case 1: return "Very Fair";
+            case 3: return "Harsh";
+            case 2: return "Moderate";
+            case 4: return "Outrageous";
+        }
+        return "";
+
     }
 }
 
@@ -72,7 +82,7 @@ class Game {
         this.AllDead = false;
         this.Winner = false;
         this.WinningPlayer = 0;
-        this.Baron = new Player(1400, CityList[6], "Peppone", 1);
+        this.Baron = new Player(1400, 6, "Peppone", true, 1);
     }
 }
 
@@ -83,6 +93,7 @@ var isPlayerMale;           // is player male?
 var player;                 // player object (from Player class)
 var game;                   // game object (from Game class)
 var populationMessages = [] // list of messages concerning population on the current turn
+var attackMessages = []     // list of messages concernings attacks on the current turn
 
 // GAME FUNCTIONS
 
@@ -102,7 +113,7 @@ const setRulerIsMale = function(isMale) {
 }
 
 const initializePlayer = function() {
-    player = new Player(1400, "Santa Paravia", playerName, isPlayerMale, 0);
+    player = new Player(1400, 0, playerName, isPlayerMale, 0);
 }
 
 const initializeGame = function() {
@@ -278,7 +289,7 @@ const ReleaseGrain = function(player, HowMuch) {
             z += Random(40);
             player.TransplantedSerfs = Math.round(z);
             player.Serfs += player.TransplantedSerfs;
-            messages.push(`${player.TransplantedSerfs} serfs move to the city`);
+            messages.push(`${player.TransplantedSerfs} serfs move to the city.`);
             zp = z;
             z = (zp * Random(100)) / 100;
             if (z > 50.0)
@@ -294,25 +305,25 @@ const ReleaseGrain = function(player, HowMuch) {
         player.JusticeRevenue = Random(player.JusticeRevenue);
         player.Serfs -= player.JusticeRevenue;
         player.FleeingSerfs = player.JusticeRevenue;
-        messages.push(`${player.FleeingSerfs} serfs flee harsh justice`);
+        messages.push(`${player.FleeingSerfs} serfs flee harsh justice.`);
     }
 
     player.MarketRevenue = player.Marketplaces * 75;
     if (player.MarketRevenue > 0) {
         player.Treasury += player.MarketRevenue;
-        messages.push(`Your market earned ${player.MarketRevenue} florins`);
+        messages.push(`Your market earned ${player.MarketRevenue} florins.`);
     }
 
     player.MillRevenue = player.Mills * (55 + Random(250));
     if (player.MillRevenue > 0) {
         player.Treasury += player.MillRevenue;
-        messages.push(`Your woolen mill earned ${player.MillRevenue} florins`);
+        messages.push(`Your woolen mill earned ${player.MillRevenue} florins.`);
     }
 
     player.SoldierPay = player.Soldiers * 3;
     player.Treasury -= player.SoldierPay;
 
-    messages.push(`You paid your soldiers ${player.SoldierPay} florins`);
+    messages.push(`You paid your soldiers ${player.SoldierPay} florins.`);
     messages.push(`You have ${player.Serfs}  serfs in your city.`);
 
     if ((player.Land / 1000) > player.Soldiers) {
@@ -322,7 +333,7 @@ const ReleaseGrain = function(player, HowMuch) {
     if ((player.Land / 500) > player.Soldiers) {
         player.InvadeMe = true;
     }
-    
+
     return messages;
 }
 
@@ -330,12 +341,113 @@ const setPopulationMessages = function(messages) {
     populationMessages = messages;
 }
 
+const AttackNeighbor = function(me, Him) {
+    var messages = [];
+    var LandTaken;
+
+    if (me.WhichPlayer == 6)    // Baron
+        LandTaken = Random(9000) + 1000;
+    else
+        LandTaken = (me.Soldiers * 1000) - (me.Land / 3);
+
+    if (LandTaken > (Him.Land - 5000))
+        LandTaken = (Him.Land - 5000) / 2;
+
+    me.Land += LandTaken;
+    Him.Land -= LandTaken;
+
+    messages.push(`${me.Title} ${me.Name} of ${me.City} invades and seizes ${LandTaken} hectares of land!`);
+
+    var deadsoldiers = Random(40);
+    if (deadsoldiers > (Him.Soldiers - 15))
+        deadsoldiers = Him.Soldiers - 15;
+    Him.Soldiers -= deadsoldiers;
+
+    messages.push(`${Him.Title} ${Him.Name} loses ${deadsoldiers} soldiers in battle.`);
+    return messages;
+}
+
+const setAttackMessages = function(messages) {
+    attackMessages = messages;
+}
+
+// perform attack rounds & return list of messages
+const attackRounds = function(player) {
+    var Players = [player, game.Baron];
+    var HowMany = Players.length;
+    var messages = [];
+    if (player.InvadeMe) {
+        for (var i = 0; i < HowMany; i++) {
+            if (i != player.WhichPlayer) {
+                if (Players[i].Soldiers > (player.Soldiers * 2.4)) {
+                    const msgs = AttackNeighbor(Players[i], player);
+                    messages = messages.concat(msgs);
+                    i = 9;
+                }
+            }
+        }
+        // if (i != 9)
+        //     AttackNeighbor(Baron, Me);
+    }
+    setAttackMessages(messages);
+}
+
+const GenerateIncome = function(player) {
+    player.JusticeRevenue = (player.Justice * 300 - 500) * player.TitleNum;
+
+    var y = 150.0 - player.SalesTax - player.CustomsDuty - player.IncomeTax;
+    if (y < 1.0)
+        y = 1.0;
+    y /= 100.0;
+
+    player.CustomsDutyRevenue = player.Nobles * 180 + player.Clergy * 75 + player.Merchants * 20 * y;
+    player.CustomsDutyRevenue += Math.round(player.PublicWorks * 100.0);
+    player.CustomsDutyRevenue = Math.round(player.CustomsDuty / 100.0 * player.CustomsDutyRevenue);
+    player.SalesTaxRevenue = player.Nobles * 50 + player.Merchants * 25 + Math.round(player.PublicWorks * 10.0);
+    player.SalesTaxRevenue *= (y * (5 - player.Justice) * player.SalesTax);
+    player.SalesTaxRevenue /= 200;
+    player.IncomeTaxRevenue = player.Nobles * 250 + Math.round(player.PublicWorks * 20.0);
+    player.IncomeTaxRevenue += (10 * player.Justice * player.Nobles * y);
+    player.IncomeTaxRevenue *= player.IncomeTax;
+    player.IncomeTaxRevenue /= 100;
+}
+
+const adjustCustomsDuty = function(player, duty) {
+    if (duty >= 0 && duty <= 100) {
+        player.CustomsDuty = duty;
+    } else {
+        showError("Invalid value!");
+    }
+}
+
+const adjustSalesTax = function(player, duty) {
+    if (duty >= 0 && duty <= 50) {
+        player.SalesTax = duty;
+    } else {
+        showError("Invalid value!");
+    }
+}
+
+const adjustIncomeTax = function(player, duty) {
+    if (duty >= 0 && duty <= 25) {
+        player.IncomeTax = duty;
+    } else {
+        showError("Invalid value!");
+    }
+}
+
+const adjustJustice = function(player, justice) {
+    if (justice >= 1 && justice <= 4) {
+        player.Justice = justice;
+    }
+}
+
 const newTurn = function() {
     // GenerateHarvest(player);
     // NewLandAndGrainPrices(player);
         // ---> prepareBuySellGrain()
 
-    BuySellGrain(player);
+    //BuySellGrain(player);
         // screen buySellGrain
 
     // ReleaseGrain(Me);
@@ -354,8 +466,10 @@ const newTurn = function() {
     //     if (i != 9)
     //         AttackNeighbor(Baron, Me);
     // }
+        // screen battle
 
     // AdjustTax(Me);
+        // adjustTaxScreen + GenerateIncome
     // DrawMap(Me);
     // StatePurchases(Me, HowMany, MyPlayers);
     // CheckNewTitle(Me);
@@ -618,11 +732,56 @@ const screenPopulationText = function() {
     return screen;
 }
 
+const screenBattleText = function() {
+    if (attackMessages.length === 0) {
+        return "There were no attacks this year.";
+    } else {
+        var screen = `
+        <table>`;
+        attackMessages.forEach((msg) => {
+            screen += `<tr><td>${msg}</td></tr>`;
+        });
+        screen += "</table>";
+        return screen;
+    }
+}
+
+const screenAdjustTaxText = function() {
+    var revenues = player.CustomsDutyRevenue + player.SalesTaxRevenue + player.IncomeTaxRevenue + player.JusticeRevenue;
+
+    return `<table><tr><td>State revenues ${revenues.toFixed(2)} gold florins.</td></tr></table>` +
+    `<table>
+    <tr valign=bottom> <td>Customs Duty</td> <td>Sales Tax</td> <td>Income Tax</td> <td>Justice</td> </tr>
+    <tr valign=top> <td>${player.CustomsDuty}%</td> <td>${player.SalesTax}%</td> <td>${player.IncomeTax}%</td> <td>${player.justiceAsString()}</td> </tr>
+    <tr valign=top> <td>${player.CustomsDutyRevenue.toFixed(2)}</td> <td>${player.SalesTaxRevenue.toFixed(2)}</td> <td>${player.IncomeTaxRevenue.toFixed(2)}</td> <td>${player.JusticeRevenue.toFixed(2)}</td> </tr>
+    </table>
+    `;
+}
+
+const screenCustomsDutyText = function() {
+    return `Sales Tax: ${player.CustomsDuty}%<br>
+    New customs duty (0 to 100):`;
+}
+
+const screenSalesTaxText = function() {
+    return `Customs Duty: ${player.SalesTax}%<br>
+    New sales tax (0 to 50):`;
+}
+
+const screenIncomeTaxText = function() {
+    return `Income Tax: ${player.IncomeTax}%<br>
+    New wealth tax (0 to 25):`;
+}
+
+const screenJusticeText = function() {
+    return `Justice: ${player.justiceAsString()}<br>
+    New justice:`;
+}
 
 // content of the different game screens
 const screens = {
   start: {
-    image: "./img/village.svg",
+    image: "./img/city.svg",
     text: "Santa Paravia and Fiumaccio.<br>Do you wish to read the instructions?",
     buttons: [["Yes", "advanceTo(screens.instructions)"], ["No", "advanceTo(screens.difficulty)"]]
   },
@@ -717,9 +876,51 @@ const screens = {
   population: {
     image: "./img/village.svg",
     text: () => screenPopulationText(),
-    buttons: [["Continue", "advanceTo(screens.newTurn)"]]
+    buttons: [["Continue", "advanceTo(screens.battle)"]]
   },
-
+  battle: {
+    preprocess: "attackRounds(player)",
+    image: "./img/statue.svg",
+    text: () => screenBattleText(),
+    buttons: [["Continue", "advanceTo(screens.adjustTax)"]]
+  },
+  adjustTax: {
+    preprocess: "GenerateIncome(player)",
+    image: "./img/townhall.svg",
+    text: () => screenAdjustTaxText(),
+    buttons: [
+        ["Customs Duty", "advanceTo(screens.customsDuty)"],
+        ["Sales Tax", "advanceTo(screens.salesTax)"],
+        ["Income Tax", "advanceTo(screens.incomeTax)"],
+        ["Justice", "advanceTo(screens.justice)"],
+        ["Continue", "advanceTo(screens.newTurn)"]
+    ]
+  },
+  customsDuty: {
+    image: "./img/docks.svg",
+    text: () => screenCustomsDutyText(),
+    inputText: "actionAndAdvanceTo(adjustCustomsDuty(player,input.value),screens.adjustTax)"
+  },
+  salesTax: {
+    image: "./img/inn.svg",
+    text: () => screenSalesTaxText(),
+    inputText: "actionAndAdvanceTo(adjustSalesTax(player,input.value),screens.adjustTax)"
+  },
+  incomeTax: {
+    image: "./img/university.svg",
+    text: () => screenIncomeTaxText(),
+    inputText: "actionAndAdvanceTo(adjustIncomeTax(player,input.value),screens.adjustTax)"
+  },
+  justice: {
+    image: "./img/gallows.svg",
+    text: () => screenJusticeText(),
+    buttons: [
+        ["Very fair", "actionAndAdvanceTo(adjustJustice(player,1),screens.adjustTax)"],
+        ["Moderate", "actionAndAdvanceTo(adjustJustice(player,2),screens.adjustTax)"],
+        ["Harsh", "actionAndAdvanceTo(adjustJustice(player,3),screens.adjustTax)"],
+        ["Outrageous", "actionAndAdvanceTo(adjustJustice(player,4),screens.adjustTax)"]
+    ]
+  },
 };
 
 // start game
@@ -728,7 +929,7 @@ advanceTo(screens.start);
 
 //TEMP
 // setDifficulty(1);
-// setRulerName("Rodrigo Borgia");
+// setRulerName("Brancaleone da Norcia");
 // setRulerIsMale(true);
 // initializePlayer();
 // advanceTo(screens.areYouReady);
