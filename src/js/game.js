@@ -442,6 +442,83 @@ const adjustJustice = function(player, justice) {
     }
 }
 
+const AddRevenue = function(player) {
+    this.Treasury += (this.JusticeRevenue + this.CustomsDutyRevenue);
+    this.reasury += (this.IncomeTaxRevenue + this.SalesTaxRevenue);
+
+    // Penalize deficit spending.
+    if (this.Treasury < 0)
+        this.Treasury = Math.round(this.Treasury * 1.5);
+
+    // Will a title make the creditors happy (for now)?
+    if (this.Treasury < (-10000 * this.TitleNum))
+        this.IsBankrupt = true;
+}
+
+const SeizeAssets = function(player) {
+    player.Marketplaces = 0;
+    player.Palace = 0;
+    player.Cathedral = 0;
+    player.Mills = 0;
+    player.Land = 6000;
+    player.PublicWorks = 1.0;
+    player.Treasury = 100;
+    player.IsBankrupt = false;
+}
+
+const BuyMarket = function(player) {
+    if (player.Treasury < 1000) {
+        showError("Sire, your treasury can't afford that much!");
+        return;
+    }
+    player.Marketplaces += 1;
+    player.Merchants += 5;
+    player.Treasury -= 1000;
+    player.PublicWorks += 1.0;
+}
+
+const BuyMill = function(player) {
+    if (player.Treasury < 2000) {
+        showError("Sire, your treasury can't afford that much!");
+        return;
+    }
+    player.Mills += 1;
+    player.Treasury -= 2000;
+    player.PublicWorks += 0.25;
+}
+
+const BuyPalace = function(player) {
+    if (player.Treasury < 3000) {
+        showError("Sire, your treasury can't afford that much!");
+        return;
+    }
+    player.Palace += 1;
+    player.Nobles += Random(2);
+    player.Treasury -= 3000;
+    player.PublicWorks += 0.5;
+}
+
+const BuyCathedral = function(player) {
+    if (player.Treasury < 5000) {
+        showError("Sire, your treasury can't afford that much!");
+        return;
+    }
+    player.Cathedral += 1;
+    player.Clergy += Random(6);
+    player.Treasury -= 5000;
+    player.PublicWorks += 1.0;
+}
+
+const BuySoldiers = function(player) {
+    if (player.Treasury < 500) {
+        showError("Sire, your treasury can't afford that much!");
+        return;
+    }
+    player.Soldiers += 20;
+    player.Serfs -= 20;
+    player.Treasury -= 500;
+}
+
 const newTurn = function() {
     // GenerateHarvest(player);
     // NewLandAndGrainPrices(player);
@@ -471,7 +548,9 @@ const newTurn = function() {
     // AdjustTax(Me);
         // adjustTaxScreen + GenerateIncome
     // DrawMap(Me);
+        // map screen (TBD)
     // StatePurchases(Me, HowMany, MyPlayers);
+        // state purchases screen
     // CheckNewTitle(Me);
 
     // player.Year++;
@@ -732,6 +811,15 @@ const screenPopulationText = function() {
     return screen;
 }
 
+const checkBattle = function()  {
+    attackRounds(player);
+    if (attackMessages.length === 0) {
+        advanceTo(screens.adjustTax);
+    } else {
+        advanceTo(screens.battle);
+    }    
+}
+
 const screenBattleText = function() {
     if (attackMessages.length === 0) {
         return "There were no attacks this year.";
@@ -776,6 +864,33 @@ const screenIncomeTaxText = function() {
 const screenJusticeText = function() {
     return `Justice: ${player.justiceAsString()}<br>
     New justice:`;
+}
+
+const checkBankruptcy = function() {
+    AddRevenue(player);
+    if (player.IsBankrupt) {
+        advanceTo(screens.bankruptcy);
+    } else {
+        advanceTo(screens.map);
+    }
+}
+
+const screenBankruptcyText = function() {
+    return `${player.Title} ${player.Name} is bankrupt.<br>
+            Creditors have seized much of your assets.`;
+}
+
+const screenStatePurchasesText = function() {
+    return `<table>
+    <tr><td colspan=2>State purchases:</td></tr>
+    <tr><td colspan=2>&nbsp;</td></tr>
+    <tr><td>Marketplace (${player.Marketplaces})</td> <td align=right>1000 florins</td></tr>
+    <tr><td>Woolen mill (${player.Mills})</td> <td align=right>2000 florins</td></tr>
+    <tr><td>Palace (partial) (${player.Palace})</td> <td align=right>3000 florins</td></tr>
+    <tr><td>Cathedral (partial) (${player.Cathedral})</td> <td align=right>5000 florins</td></tr>
+    <tr><td>Equip one platoon of serfs as soldiers (${player.Soldiers} soldiers)</td> <td align=right>500 florins</td></tr>
+    <tr><td colspan=2>&nbsp;</td></tr>
+    <tr><td>You have in your treasury</td> <td align=right>${player.Treasury.toFixed(2)} gold florins</td></tr>`;
 }
 
 // content of the different game screens
@@ -876,7 +991,7 @@ const screens = {
   population: {
     image: "./img/village.svg",
     text: () => screenPopulationText(),
-    buttons: [["Continue", "advanceTo(screens.battle)"]]
+    buttons: [["Continue", "checkBattle()"]]
   },
   battle: {
     preprocess: "attackRounds(player)",
@@ -893,7 +1008,7 @@ const screens = {
         ["Sales Tax", "advanceTo(screens.salesTax)"],
         ["Income Tax", "advanceTo(screens.incomeTax)"],
         ["Justice", "advanceTo(screens.justice)"],
-        ["Continue", "advanceTo(screens.newTurn)"]
+        ["Continue", "checkBankruptcy()"]
     ]
   },
   customsDuty: {
@@ -921,6 +1036,30 @@ const screens = {
         ["Outrageous", "actionAndAdvanceTo(adjustJustice(player,4),screens.adjustTax)"]
     ]
   },
+  bankruptcy: {
+    image: "./img/wreck.svg",
+    text: () => screenBankruptcyText(),
+    buttons: [["Oh, no!", "advanceTo(screens.map)"]]
+  },
+  map: {
+    image: "./img/city.svg",
+    text: "Map Placeholder",
+    buttons: [["Continue", "advanceTo(screens.statePurchases)"]]
+  },
+  statePurchases: {
+    image: "./img/cathedral.svg",
+    text: () => screenStatePurchasesText(),
+    buttons: [
+        ["Buy Marketplace", "actionAndAdvanceTo(BuyMarket(player),screens.statePurchases)"],
+        ["Buy Woolen Mill", "actionAndAdvanceTo(BuyMill(player),screens.statePurchases)"],
+        ["Buy Palace (Partial)", "actionAndAdvanceTo(BuyPalace(player),screens.statePurchases)"],
+        ["Buy Cathedral (Partial)", "actionAndAdvanceTo(BuyCathedral(player),screens.statePurchases)"],
+        ["Equip Platoon", "actionAndAdvanceTo(BuySoldiers(player),screens.statePurchases)"],
+        ["Map", "advanceTo(screens.map)"],
+        ["Continue", "advanceTo(screens.newTurn)"]
+    ]
+  },
+
 };
 
 // start game
