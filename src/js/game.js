@@ -20,6 +20,11 @@ const showError = function(msg) {
     alert(msg);
 }
 
+const limit10 = function(num, denom) {
+    var val = Math.round(num / denom);
+    return (val > 10 ? 10 : val);
+}
+
 // GAME CONSTANTS & CLASSES
 CityList = ["Santa Paravia", "Fiumaccio", "Torricella", "Molinetto", "Fontanile", "Romanga", "Monterana"];
 MaleTitles = ["Sir", "Baron", "Count", "Marquis", "Duke", "Grand Duke", "Prince", "* H.R.H. King"];
@@ -519,45 +524,58 @@ const BuySoldiers = function(player) {
     player.Treasury -= 500;
 }
 
-const newTurn = function() {
-    // GenerateHarvest(player);
-    // NewLandAndGrainPrices(player);
-        // ---> prepareBuySellGrain()
+const ChangeTitle = function(player) {
+    if (player.MaleOrFemale)
+        player.Title = MaleTitles[player.TitleNum];
+    else
+        player.Title = FemaleTitles[player.TitleNum];
 
-    //BuySellGrain(player);
-        // screen buySellGrain
+    if (player.TitleNum == 7)
+        player.IWon = true;
+}
 
-    // ReleaseGrain(Me);
-        // screen ReleaseGrain
+const CheckNewTitle = function (player) {
+    // Tally up our success so far.
+    var Total = limit10(player.Marketplaces, 1);
+    Total += limit10(player.Palace, 1);
+    Total += limit10(player.Cathedral, 1);
+    Total += limit10(player.Mills, 1);
+    Total += limit10(player.Treasury, 5000);
+    Total += limit10(player.Land, 6000);
+    Total += limit10(player.Merchants, 50);
+    Total += limit10(player.Nobles, 5);
+    Total += limit10(player.Soldiers, 50);
+    Total += limit10(player.Clergy, 10);
+    Total += limit10(player.Serfs, 2000);
+    Total += limit10(Math.round(player.PublicWorks * 100.0), 500);
+    player.TitleNum = (Total / player.Difficulty) - player.Justice;
+    
+    if (player.TitleNum > 7)
+        player.TitleNum = 7;
+    if (player.TitleNum < 0)
+        player.TitleNum = 0;
+    
+    // Did we change (could be backwards or forwards)?
+    if (player.TitleNum > player.OldTitle) {
+        player.OldTitle = player.TitleNum;
+        ChangeTitle(player);
+        return true;
+    }
+    
+    player.TitleNum = player.OldTitle;
+    return false;
+}
 
-    // if (player.InvadeMe) {
-    //     int i;
-    //     for (i = 0; i < HowMany; i++) {
-    //         if (i != player.WhichPlayer)
-    //             if (MyPlayers[i].Soldiers > (player.Soldiers * 2.4)) {
-    //                 AttackNeighbor(&MyPlayers[i], Me);
-    //                 i = 9;
-    //             }
-    //     }
-
-    //     if (i != 9)
-    //         AttackNeighbor(Baron, Me);
-    // }
-        // screen battle
-
-    // AdjustTax(Me);
-        // adjustTaxScreen + GenerateIncome
-    // DrawMap(Me);
-        // map screen (TBD)
-    // StatePurchases(Me, HowMany, MyPlayers);
-        // state purchases screen
-    // CheckNewTitle(Me);
-
-    // player.Year++;
-    // if (player.Year == player.YearOfDeath)
-    //     ImDead(Me);
-    // if (player.TitleNum >= 7)
-    //     player.IWon = true;    
+const endTurn = function(player) {
+    player.Year += 1;
+    if (player.TitleNum >= 7) {
+        player.IWon = true;
+        advanceTo(screens.victory);    
+    } else if (player.Year == player.YearOfDeath) {
+        advanceTo(screens.death);
+    } else {
+        advanceTo(screens.newTurn);
+    }
 }
 
 // UI FUNCTIONS
@@ -627,6 +645,8 @@ const updatePlayerStatus = function() {
         <table>
         <tr><td>${player.Title} ${player.Name} of ${player.City}</td>   <td align=right>Year ${player.Year}</td></tr>
         </table>`
+    } else {
+        playerStatus.innerHTML = "";
     }
 }
 
@@ -649,7 +669,7 @@ const actionAndAdvanceTo = function (a, s) {
 // GAME SCREENS
 
 const screenRulerGenderText = function() {
-    return "Is %s male or female?".replace("%s", playerName)
+    return `Is ${playerName} male or female?`;
 }
 
 const screenAreYouReadyText = function() {
@@ -880,6 +900,18 @@ const screenBankruptcyText = function() {
             Creditors have seized much of your assets.`;
 }
 
+const screenStatsText = function() {
+    return `<table>
+    <tr><td>Nobles:</td> <td align=right>${player.Nobles}</td></tr>
+    <tr><td>Soldiers:</td> <td align=right>${player.Soldiers}</td></tr>
+    <tr><td>Clergy:</td> <td align=right>${player.Clergy}</td></tr>
+    <tr><td>Merchants:</td> <td align=right>${player.Merchants}</td></tr>
+    <tr><td>Serfs:</td> <td align=right>${player.Serfs}</td></tr>
+    <tr><td>Land:</td> <td align=right>${player.Land}</td><td> hectares</td></tr>
+    <tr><td>Treasury:</td> <td align=right>${player.Treasury.toFixed(2)}</td> <td> gold florins</td></tr>
+    </table>`;
+}
+
 const screenStatePurchasesText = function() {
     return `<table>
     <tr><td colspan=2>State purchases:</td></tr>
@@ -891,6 +923,60 @@ const screenStatePurchasesText = function() {
     <tr><td>Equip one platoon of serfs as soldiers (${player.Soldiers} soldiers)</td> <td align=right>500 florins</td></tr>
     <tr><td colspan=2>&nbsp;</td></tr>
     <tr><td>You have in your treasury</td> <td align=right>${player.Treasury.toFixed(2)} gold florins</td></tr>`;
+}
+
+const checkForNewTitle = function() {
+    const titleUpgrade = CheckNewTitle(player);
+    if (titleUpgrade) {
+        advanceTo(screens.newTitle);
+    } else {
+        endTurn(player);
+    }
+}
+
+const screenNewTitleText = function() {
+    return `The achievements of ${player.Name} warrant a new rank of ${player.Title}.`;
+}
+
+const screenDeathText = function() {
+    var screen = `Very sad news.<br> ${player.Title} ${player.Name} has just died `;
+
+    if (player.Year > 1450)
+        screen += "of old age after a long reign.";
+    else {
+        var why = Random(8);
+        switch (why) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+                screen += "of pneumonia after a cold winter in a drafty castle.";
+                break;
+            case 4:
+                screen += "of typhoid after drinking contaminated water.";
+                break;
+            case 5:
+                screen += "in a smallpox epidemic.";
+                break;
+            case 6:
+                screen += "after being attacked by robbers while travelling.";
+                break;
+            case 7:
+            case 8:
+                screen += "of food poisoning.";
+                break;
+        }
+    }
+    player.IsDead = true;
+    return screen;
+}
+
+const clearGame = function() {
+    player = undefined;
+    game = undefined;
+    playerName = "";
+    difficulty = undefined;
+    isPlayerMale = undefined;
 }
 
 // content of the different game screens
@@ -1046,6 +1132,11 @@ const screens = {
     text: "Map Placeholder",
     buttons: [["Continue", "advanceTo(screens.statePurchases)"]]
   },
+  stats: {
+    image: "./img/round-tower-with-flag.svg",
+    text: () => screenStatsText(),
+    buttons: [["Continue", "advanceTo(screens.statePurchases)"]]
+  },
   statePurchases: {
     image: "./img/cathedral.svg",
     text: () => screenStatePurchasesText(),
@@ -1056,8 +1147,24 @@ const screens = {
         ["Buy Cathedral (Partial)", "actionAndAdvanceTo(BuyCathedral(player),screens.statePurchases)"],
         ["Equip Platoon", "actionAndAdvanceTo(BuySoldiers(player),screens.statePurchases)"],
         ["Map", "advanceTo(screens.map)"],
-        ["Continue", "advanceTo(screens.newTurn)"]
+        ["Show Stats", "advanceTo(screens.stats)"],
+        ["Continue", "checkForNewTitle()"]
     ]
+  },
+  newTitle: {
+    image: "./img/throne.svg",
+    text: () => screenNewTitleText(),
+    buttons: [["Very well", "endTurn(player)"]]
+  },
+  death: {
+    image: "./img/graveyard.svg",
+    text: () => screenDeathText(),
+    buttons: [["Let's try again...", "actionAndAdvanceTo(clearGame(),screens.start)"]]
+  },
+  victory: {
+    image: "./img/sword-stone.svg",
+    text: "Congratulations, you have been crowned Majesty and won the game!",
+    buttons: [["Let's play again!", "actionAndAdvanceTo(clearGame(),screens.start)"]]
   },
 
 };
