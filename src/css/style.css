@@ -19,7 +19,14 @@ body {
     background-position: center;
     margin-bottom: 1em;
   }
-  
+
+  #mapDiv {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+    justify-content: center;
+  }
+
   input {
     width: 100%;
     height: 30px;

@@ -1,0 +1,1610 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1280"
+   height="1280"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="path_tiles_rounded.svg"
+   inkscape:export-filename="/media/sda1/backup_projects/crpg/floss_gfx/path_tiles_example_rounded.jpg.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs4">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-80">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-3"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-3">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-2"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-3-9">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-2-6"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-0">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-41"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-0-8">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-41-8"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3108-7-4-9-1-6">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3110-80-0-7-4-2"
+         width="128"
+         height="128"
+         x="139.81726"
+         y="924.30298" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-3-9-98">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-2-6-13"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3108-7-6-9-7">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3110-80-3-9-2"
+         width="128"
+         height="128"
+         x="139.81726"
+         y="924.30298" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3108-7-6-3-0">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3110-80-3-4-8"
+         width="128"
+         height="128"
+         x="139.81726"
+         y="924.30298" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-3-9-1-9-4">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-2-6-97-1-6"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective3228"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-3-9-1-9-4-9">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-2-6-97-1-6-8"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective3265"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-0-0">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-41-1"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective3308"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-3-9-1-9-4-9-0">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-2-6-97-1-6-8-3"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective3308-7"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-3-9-1-9-4-9-2">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-2-6-97-1-6-8-7"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective3308-8"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-3-9-1-9-4-9-3">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-2-6-97-1-6-8-2"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective3383"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3108-7-6-9-7-2">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3110-80-3-9-2-7"
+         width="128"
+         height="128"
+         x="139.81726"
+         y="924.30298" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective3414"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-0-0-1">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-41-1-0"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective3414-3"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-0-0-4">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-41-1-7"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective3414-8"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-0-0-9">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-41-1-5"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective3503"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-3-9-1-9-4-4">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-2-6-97-1-6-85"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective3548"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-3-9-1-9-4-4-2">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-2-6-97-1-6-85-9"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective3548-9"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-3-9-1-9-4-4-1">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-2-6-97-1-6-85-0"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective3548-5"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-3-9-1-9-4-4-9">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-2-6-97-1-6-85-1"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective3602"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-0-0-6">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-41-1-6"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective3657"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-0-0-6-9">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-41-1-6-7"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective3702"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-0-0-6-8">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-41-1-6-76"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective3702-0"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-0-0-6-0">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-41-1-6-6"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective3702-5"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-0-0-6-4">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-41-1-6-9"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective3702-58"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-0-0-6-2">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-41-1-6-2"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective3771"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3108-7-6-9-7-0">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3110-80-3-9-2-0"
+         width="128"
+         height="128"
+         x="139.81726"
+         y="924.30298" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective3833"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3082-0-3-9-1-9-4-7">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3084-7-2-6-97-1-6-3"
+         width="128"
+         height="128"
+         x="297.07324"
+         y="610.3938" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective3872"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3108-7-6-3-0-3">
+      <rect
+         style="fill:#eeeeec;fill-opacity:1;stroke:none"
+         id="rect3110-80-3-4-8-3"
+         width="128"
+         height="128"
+         x="139.81726"
+         y="924.30298" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.31060016"
+     inkscape:cx="479.0061"
+     inkscape:cy="380.74"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="1280"
+     inkscape:window-height="950"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     borderlayer="true"
+     inkscape:showpageshadow="false"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2830"
+       empspacing="1"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       spacingx="128px"
+       spacingy="128px" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,227.63782)">
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Gothic L;-inkscape-font-specification:URW Gothic L"
+       x="407.6228"
+       y="-784.95996"
+       id="text2872"
+       transform="matrix(0,1,-1,0,0,0)"><tspan
+         sodipodi:role="line"
+         id="tspan2874"
+         x="407.6228"
+         y="-784.95996">Vertical</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Gothic L;-inkscape-font-specification:URW Gothic L"
+       x="604"
+       y="-139.63782"
+       id="text2905"><tspan
+         sodipodi:role="line"
+         id="tspan2907"
+         x="604"
+         y="-139.63782">Horizontal</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Gothic L;-inkscape-font-specification:URW Gothic L"
+       x="117.23106"
+       y="-174.61543"
+       id="text2942"><tspan
+         sodipodi:role="line"
+         id="tspan2944"
+         x="117.23106"
+         y="-174.61543">Outside</tspan><tspan
+         sodipodi:role="line"
+         x="117.23106"
+         y="-124.61543"
+         id="tspan2946">Corners</tspan></text>
+    <g
+       id="g2938-6"
+       transform="matrix(0,-1,1,0,-610.38866,325.43532)"
+       clip-path="url(#clipPath3082-0)">
+      <rect
+         y="607.69635"
+         x="293.99591"
+         height="132.88756"
+         width="137.3521"
+         id="rect2846-8-6"
+         style="fill:#73d216;fill-opacity:1;stroke:none" />
+      <rect
+         transform="matrix(0,1,-1,0,0,0)"
+         y="-405.62375"
+         x="629.93787"
+         height="110"
+         width="119"
+         id="rect2848-38-8"
+         style="fill:#c17d11;fill-opacity:1;stroke:none"
+         ry="40" />
+      <rect
+         ry="40"
+         style="fill:#c17d11;fill-opacity:1;stroke:none"
+         id="rect5337"
+         width="119"
+         height="110"
+         x="629.93787"
+         y="-365.62375"
+         transform="matrix(0,1,-1,0,0,0)" />
+      <rect
+         ry="40"
+         style="fill:#c17d11;fill-opacity:1;stroke:none"
+         id="rect5339"
+         width="119"
+         height="110"
+         x="669.93787"
+         y="-405.62375"
+         transform="matrix(0,1,-1,0,0,0)" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Gothic L;-inkscape-font-specification:URW Gothic L"
+       x="519.57031"
+       y="123.91089"
+       id="text2872-8"><tspan
+         sodipodi:role="line"
+         x="519.57031"
+         y="123.91089"
+         id="tspan3582">4-way</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Gothic L;-inkscape-font-specification:URW Gothic L"
+       x="446.49786"
+       y="772.02533"
+       id="text2872-8-0-7"><tspan
+         sodipodi:role="line"
+         x="446.49786"
+         y="772.02533"
+         id="tspan3582-7-4">2-ways</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Gothic L;-inkscape-font-specification:URW Gothic L"
+       x="63.001793"
+       y="353.35818"
+       id="text2942-8"><tspan
+         sodipodi:role="line"
+         id="tspan2944-5"
+         x="63.001793"
+         y="353.35818">Inside</tspan><tspan
+         sodipodi:role="line"
+         x="63.001793"
+         y="403.35818"
+         id="tspan2946-6">Corners</tspan></text>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g2938-6"
+       id="use4349"
+       transform="matrix(0,1,-1,0,284.36722,-99.65689)"
+       width="744.09448"
+       height="1052.3622" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g2938-6"
+       id="use4349-4"
+       transform="matrix(-1,0,0,-1,384.00508,184.71042)"
+       width="744.09448"
+       height="1052.3622" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g2938-6"
+       id="use4349-0"
+       transform="matrix(0,-1,1,0,99.63792,284.36732)"
+       width="744.09448"
+       height="1052.3622" />
+    <g
+       id="g2938-6-4"
+       transform="matrix(0,-1,1,0,-610.3938,837.43533)"
+       clip-path="url(#clipPath3082-0-80)">
+      <rect
+         y="607.69635"
+         x="293.99591"
+         height="132.88756"
+         width="137.3521"
+         id="rect2846-8-6-3"
+         style="fill:#c17d11;fill-opacity:1;stroke:none" />
+      <rect
+         transform="matrix(0,1,-1,0,0,0)"
+         y="-405.62375"
+         x="629.93787"
+         height="110"
+         width="119"
+         id="rect2848-38-8-6"
+         style="fill:#73d216;fill-opacity:1;stroke:none"
+         ry="40" />
+      <rect
+         style="fill:#73d216;fill-opacity:1;stroke:none"
+         id="rect5343"
+         width="119"
+         height="110"
+         x="681.93787"
+         y="-405.62375"
+         transform="matrix(0,1,-1,0,0,0)" />
+      <rect
+         style="fill:#73d216;fill-opacity:1;stroke:none"
+         id="rect5345"
+         width="119"
+         height="110"
+         x="629.93787"
+         y="-359.62375"
+         transform="matrix(0,1,-1,0,0,0)" />
+    </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g2938-6-4"
+       id="use4426"
+       transform="matrix(0,1,-1,0,796.36203,412.36209)"
+       width="744.09448"
+       height="1052.3622" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g2938-6-4"
+       id="use4426-9"
+       transform="matrix(-1,0,0,-1,383.99994,1208.7243)"
+       width="744.09448"
+       height="1052.3622" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g2938-6-4"
+       id="use4426-9-3"
+       transform="matrix(0,-1,1,0,-412.36209,796.36218)"
+       width="744.09448"
+       height="1052.3622" />
+    <g
+       id="g2938-6-6"
+       transform="matrix(0,-1,1,0,-98.39369,325.43542)"
+       clip-path="url(#clipPath3082-0-3)">
+      <rect
+         y="607.69635"
+         x="293.99591"
+         height="132.88756"
+         width="137.3521"
+         id="rect2846-8-6-8"
+         style="fill:#73d216;fill-opacity:1;stroke:none" />
+      <rect
+         transform="matrix(0,1,-1,0,0,0)"
+         y="-405.62375"
+         x="629.93787"
+         height="89.085854"
+         width="119"
+         id="rect2848-38-8-5"
+         style="fill:#c17d11;fill-opacity:1;stroke:none"
+         ry="40" />
+      <rect
+         ry="40"
+         style="fill:#c17d11;fill-opacity:1;stroke:none"
+         id="rect5341"
+         width="119"
+         height="89.085854"
+         x="669.93787"
+         y="-405.62375"
+         transform="matrix(0,1,-1,0,0,0)" />
+    </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g2938-6-6"
+       id="use4518"
+       transform="matrix(-1,0,0,-1,1408.0001,-71.27564)"
+       width="744.09448"
+       height="1052.3622" />
+    <g
+       id="g2938-6-6-9"
+       transform="matrix(0,-1,1,0,29.60634,325.43542)"
+       clip-path="url(#clipPath3082-0-3-9)">
+      <rect
+         y="607.69635"
+         x="293.99591"
+         height="132.88756"
+         width="137.3521"
+         id="rect2846-8-6-8-4"
+         style="fill:#73d216;fill-opacity:1;stroke:none" />
+      <rect
+         transform="matrix(0,1,-1,0,0,0)"
+         y="-405.62375"
+         x="606.93787"
+         height="89.085854"
+         width="134.5"
+         id="rect2848-38-8-5-8"
+         style="fill:#c17d11;fill-opacity:1;stroke:none"
+         ry="0" />
+    </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g2938-6-6"
+       id="use4581"
+       transform="matrix(0,1,-1,0,668.36219,-227.63786)"
+       width="744.09448"
+       height="1052.3622" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use4518"
+       id="use4583"
+       transform="matrix(0,1,-1,0,668.36219,-227.63786)"
+       width="744.09448"
+       height="1052.3622" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g2938-6-6-9"
+       id="use4585"
+       transform="matrix(0,1,-1,0,668.36219,-227.63786)"
+       width="744.09448"
+       height="1052.3622" />
+    <g
+       clip-path="url(#clipPath3082-0-0)"
+       transform="matrix(0,-1,1,0,-226.3938,1221.4354)"
+       id="g4890">
+      <rect
+         style="fill:#73d216;fill-opacity:1;stroke:none"
+         id="rect4892"
+         width="137.3521"
+         height="132.88756"
+         x="293.99591"
+         y="607.69635" />
+      <rect
+         style="fill:#c17d11;fill-opacity:1;stroke:none"
+         id="rect3108"
+         width="119"
+         height="110"
+         x="629.93787"
+         y="-345.62375"
+         transform="matrix(0,1,-1,0,0,0)" />
+      <rect
+         transform="matrix(0,1,-1,0,0,0)"
+         y="-405.62375"
+         x="669.93787"
+         height="110"
+         width="119"
+         id="rect3106"
+         style="fill:#c17d11;fill-opacity:1;stroke:none" />
+      <rect
+         ry="40"
+         style="fill:#c17d11;fill-opacity:1;stroke:none"
+         id="rect4894"
+         width="119"
+         height="110"
+         x="629.93787"
+         y="-405.62375"
+         transform="matrix(0,1,-1,0,0,0)" />
+      <rect
+         style="fill:#73d216;fill-opacity:1;stroke:none"
+         id="rect4892-9"
+         width="35.125534"
+         height="36.489491"
+         x="281.39716"
+         y="718.84808"
+         ry="40" />
+    </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g4890"
+       id="use4918"
+       transform="matrix(0,1,-1,0,1436.3622,412.36216)"
+       width="744.09448"
+       height="1052.3622" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g4890"
+       id="use4920"
+       transform="matrix(-1,0,0,-1,1024,1848.7243)"
+       width="744.09448"
+       height="1052.3622" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g4890"
+       id="use4922"
+       transform="matrix(0,-1,1,0,-412.36216,1436.3622)"
+       width="744.09448"
+       height="1052.3622" />
+    <g
+       clip-path="url(#clipPath3082-0-0-8)"
+       transform="matrix(0,-1,1,0,157.60624,1221.4354)"
+       id="g4890-9">
+      <rect
+         ry="0"
+         style="fill:#c17d11;fill-opacity:1;stroke:none"
+         id="rect4894-3"
+         width="119.3"
+         height="133.45103"
+         x="629.73792"
+         y="-429.0748"
+         transform="matrix(0,1,-1,0,0,0)" />
+      <rect
+         style="fill:#73d216;fill-opacity:1;stroke:none"
+         id="rect4892-9-5"
+         width="35.125534"
+         height="36.489491"
+         x="281.39716"
+         y="718.84808"
+         ry="40" />
+      <rect
+         style="fill:#73d216;fill-opacity:1;stroke:none"
+         id="rect4892-9-5-1"
+         width="34.766159"
+         height="35.782383"
+         x="405.62222"
+         y="718.83557"
+         ry="40" />
+      <rect
+         y="607.69635"
+         x="293.99591"
+         height="22.125347"
+         width="137.3521"
+         id="rect3104"
+         style="fill:#73d216;fill-opacity:1;stroke:none" />
+    </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g4890-9"
+       id="use5127"
+       transform="matrix(0,1,-1,0,1820.3622,28.36216)"
+       width="768"
+       height="1152" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g4890-9"
+       id="use5129"
+       transform="matrix(-1,0,0,-1,1792.0001,1848.7243)"
+       width="768"
+       height="1152" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g4890-9"
+       id="use5131"
+       transform="matrix(0,-1,1,0,-28.36216,1820.3622)"
+       width="768"
+       height="1152" />
+    <g
+       id="g2868-1-6-1"
+       transform="translate(372.18274,-767.9408)"
+       clip-path="url(#clipPath3108-7-4-9-1-6)">
+      <rect
+         style="fill:#c17d11;fill-opacity:1;stroke:none"
+         id="rect2864-4-1-7"
+         width="136.11447"
+         height="137.01561"
+         x="134.71396"
+         y="920.6499" />
+      <rect
+         style="fill:#c17d11;fill-opacity:1;stroke:none"
+         id="rect2866-3-8-7"
+         width="89.085999"
+         height="135"
+         x="159.29996"
+         y="922.36218" />
+      <rect
+         y="-275"
+         x="943.85675"
+         height="148.78859"
+         width="89.085999"
+         id="rect3555-2-2"
+         style="fill:#c17d11;fill-opacity:1;stroke:none"
+         transform="matrix(0,1,-1,0,0,0)" />
+      <rect
+         style="fill:#73d216;fill-opacity:1;stroke:none"
+         id="rect5349-5"
+         width="39.75"
+         height="39.75"
+         x="119.51727"
+         y="904.02808"
+         rx="47" />
+      <rect
+         style="fill:#73d216;fill-opacity:1;stroke:none"
+         id="rect5353-1"
+         width="39.75"
+         height="39.75"
+         x="248.36726"
+         y="904.02808"
+         rx="47" />
+      <rect
+         style="fill:#73d216;fill-opacity:1;stroke:none"
+         id="rect5355-9"
+         width="39.75"
+         height="39.75"
+         x="119.54226"
+         y="1032.8279"
+         rx="47" />
+      <rect
+         rx="47"
+         y="1032.8279"
+         x="248.36726"
+         height="39.75"
+         width="39.75"
+         id="rect5357-2"
+         style="fill:#73d216;fill-opacity:1;stroke:none" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Gothic L;-inkscape-font-specification:URW Gothic L"
+       x="-384"
+       y="284.36218"
+       id="text5552"><tspan
+         sodipodi:role="line"
+         x="-384"
+         y="284.36218"
+         id="tspan5556">Optimize Layout</tspan></text>
+    <g
+       id="g2938-6-6-9-3"
+       transform="matrix(0,-1,1,0,276.3902,608.57143)"
+       clip-path="url(#clipPath3082-0-3-9-98)" />
+    <g
+       clip-path="url(#clipPath3082-0)"
+       transform="matrix(0,-1,1,0,-482.38866,325.43532)"
+       id="g3195">
+      <rect
+         style="fill:#73d216;fill-opacity:1;stroke:none"
+         id="rect3197"
+         width="137.3521"
+         height="132.88756"
+         x="293.99591"
+         y="607.69635" />
+      <rect
+         style="fill:#c17d11;fill-opacity:1;stroke:none"
+         id="rect3199"
+         width="147.03448"
+         height="110"
+         x="601.90338"
+         y="-405.62375"
+         transform="matrix(0,1,-1,0,0,0)" />
+      <rect
+         transform="matrix(0,1,-1,0,0,0)"
+         y="-365.62375"
+         x="629.93787"
+         height="110"
+         width="119"
+         id="rect3201"
+         style="fill:#c17d11;fill-opacity:1;stroke:none"
+         ry="40" />
+      <rect
+         transform="matrix(0,1,-1,0,0,0)"
+         y="-405.62375"
+         x="669.93787"
+         height="110"
+         width="119"
+         id="rect3203"
+         style="fill:#c17d11;fill-opacity:1;stroke:none"
+         ry="40" />
+    </g>
+    <g
+       id="g2868-1-8-0"
+       transform="translate(-11.817261,-895.9408)"
+       clip-path="url(#clipPath3108-7-6-9-7)"
+       style="fill:#c17d11">
+      <rect
+         style="fill:#c17d11;fill-opacity:1;stroke:none"
+         id="rect2864-4-8-6"
+         width="138.60661"
+         height="140.72794"
+         x="135.05025"
+         y="917.99823" />
+    </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g3195"
+       id="use3236"
+       transform="matrix(0,1,-1,0,284.36722,-99.643061)"
+       width="1280"
+       height="1280" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g3195"
+       id="use3238"
+       transform="matrix(-1,0,0,-1,384.01028,184.72416)"
+       width="1280"
+       height="1280" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g3195"
+       id="use3240"
+       transform="matrix(0,-1,1,0,99.643061,284.36722)"
+       width="1280"
+       height="1280" />
+    <g
+       id="g2868-1-8"
+       transform="translate(-11.817261,-383.9408)"
+       clip-path="url(#clipPath3108-7-6-3-0)">
+      <rect
+         style="fill:#73d216;fill-opacity:1;stroke:none"
+         id="rect2864-4-8"
+         width="140.72792"
+         height="139.31371"
+         x="132.22183"
+         y="920.11957" />
+    </g>
+    <g
+       clip-path="url(#clipPath3082-0-80)"
+       transform="matrix(0,-1,1,0,-482.3938,837.43533)"
+       id="g3306">
+      <rect
+         style="fill:#c17d11;fill-opacity:1;stroke:none"
+         id="rect3308"
+         width="137.3521"
+         height="132.88756"
+         x="293.99591"
+         y="607.69635" />
+      <rect
+         style="fill:#73d216;fill-opacity:1;stroke:none"
+         id="rect3310"
+         width="149.04407"
+         height="110"
+         x="599.8938"
+         y="-405.62375"
+         transform="matrix(0,1,-1,0,0,0)" />
+      <rect
+         transform="matrix(0,1,-1,0,0,0)"
+         y="-405.62375"
+         x="681.93787"
+         height="110"
+         width="119"
+         id="rect3312"
+         style="fill:#73d216;fill-opacity:1;stroke:none" />
+      <rect
+         transform="matrix(0,1,-1,0,0,0)"
+         y="-359.62375"
+         x="629.93787"
+         height="110"
+         width="119"
+         id="rect3314"
+         style="fill:#73d216;fill-opacity:1;stroke:none" />
+    </g>
+    <g
+       id="g3316"
+       transform="translate(-41.073243,-70.031711)"
+       clip-path="url(#clipPath3082-0-80)">
+      <rect
+         y="607.69635"
+         x="293.99591"
+         height="132.88756"
+         width="137.3521"
+         id="rect3318"
+         style="fill:#c17d11;fill-opacity:1;stroke:none" />
+      <rect
+         transform="matrix(0,1,-1,0,0,0)"
+         y="-405.62375"
+         x="599.8938"
+         height="110"
+         width="149.04407"
+         id="rect3320"
+         style="fill:#73d216;fill-opacity:1;stroke:none" />
+      <rect
+         style="fill:#73d216;fill-opacity:1;stroke:none"
+         id="rect3322"
+         width="119"
+         height="110"
+         x="681.93787"
+         y="-405.62375"
+         transform="matrix(0,1,-1,0,0,0)" />
+      <rect
+         style="fill:#73d216;fill-opacity:1;stroke:none"
+         id="rect3324"
+         width="119"
+         height="110"
+         x="629.93787"
+         y="-359.62375"
+         transform="matrix(0,1,-1,0,0,0)" />
+    </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g3306"
+       id="use3326"
+       transform="matrix(0,-1,1,0,-412.36209,796.36209)"
+       width="1280"
+       height="1280" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g3306"
+       id="use3338"
+       transform="matrix(-1,0,0,-1,384,1208.7242)"
+       width="1280"
+       height="1280" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Gothic L;-inkscape-font-specification:URW Gothic L"
+       x="815.87836"
+       y="741.12146"
+       id="text2872-8-0"><tspan
+         sodipodi:role="line"
+         x="815.87836"
+         y="741.12146"
+         id="tspan3582-7">3-ways</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Gothic L;-inkscape-font-specification:URW Gothic L"
+       x="-326"
+       y="438"
+       id="text3180"
+       sodipodi:linespacing="125%"
+       transform="translate(0,-227.63782)"><tspan
+         sodipodi:role="line"
+         id="tspan3182"
+         x="-326"
+         y="438">TODO</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Gothic L;-inkscape-font-specification:URW Gothic L Book"
+       x="639.26782"
+       y="-505.63782"
+       id="text3184"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3186"
+         x="639.26782"
+         y="-505.63782">Rounded RPG Tile Template</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Gothic L;-inkscape-font-specification:URW Gothic L Book"
+       x="639.24969"
+       y="-441.63782"
+       id="text3188"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3190"
+         x="639.24969"
+         y="-441.63782">By gryc</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Gothic L;-inkscape-font-specification:URW Gothic L Book"
+       x="640.39093"
+       y="-367.63782"
+       id="text3192"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3194"
+         x="640.39093"
+         y="-367.63782">Creative Commons Attribution 3.0 Unported</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Gothic L;-inkscape-font-specification:URW Gothic L Book"
+       x="640.94281"
+       y="-307.63782"
+       id="text3196"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3198"
+         x="646.48969"
+         y="-307.63782">V1.0 </tspan><tspan
+         sodipodi:role="line"
+         x="640.94281"
+         y="-257.63782"
+         id="tspan3914">(Sept 6, 2010)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Gothic L;-inkscape-font-specification:URW Gothic L"
+       x="573.60657"
+       y="1145.5295"
+       id="text3200"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="573.60657"
+         y="1145.5295"
+         id="tspan3204">USAGE</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Gothic L;-inkscape-font-specification:URW Gothic L Book"
+       x="641.80688"
+       y="1213.2876"
+       id="text3208"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3210"
+         x="641.80688"
+         y="1213.2876">Simply draw your tiles over this one, using it as a guide.</tspan><tspan
+         sodipodi:role="line"
+         x="647.35376"
+         y="1263.2876"
+         id="tspan3212">This should give you enough tiles to be able to make a </tspan><tspan
+         sodipodi:role="line"
+         x="641.80688"
+         y="1313.2876"
+         id="tspan3214">large number of maps.</tspan><tspan
+         sodipodi:role="line"
+         x="641.80688"
+         y="1363.2876"
+         id="tspan3216">Do note that most of the tiles are simply mirrors of the others.</tspan><tspan
+         sodipodi:role="line"
+         x="641.80688"
+         y="1413.2876"
+         id="tspan3218">Tbere are only about 13 unique tiles. The rest are rotated copies.</tspan><tspan
+         sodipodi:role="line"
+         x="641.80688"
+         y="1463.2876"
+         id="tspan3892" /><tspan
+         sodipodi:role="line"
+         x="641.80688"
+         y="1513.2876"
+         id="tspan3894">If you do your editing in Inkscape, you can select a tile you suspect</tspan><tspan
+         sodipodi:role="line"
+         x="647.35376"
+         y="1563.2876"
+         id="tspan3896">to be a clone, and look at the bottom status bar. It should inform you </tspan><tspan
+         sodipodi:role="line"
+         x="641.80688"
+         y="1613.2876"
+         id="tspan3898">as to whether it is a clone or a group. If it's a clone, hit shift+d to lookup</tspan><tspan
+         sodipodi:role="line"
+         x="641.80688"
+         y="1663.2876"
+         id="tspan3900">the original. When you modify the original, the clones will update as well.</tspan></text>
+    <a
+       id="use3538"
+       transform="matrix(-1,0,0,-1,2176.1514,185.32532)">
+      <g
+         clip-path="url(#clipPath3082-0-3-9-1-9-4-4)"
+         transform="matrix(0,-1,1,0,285.7576,454.03638)"
+         id="g3797">
+        <rect
+           style="fill:#c17d11;fill-opacity:1;stroke:none"
+           id="rect3799"
+           width="137.3521"
+           height="132.88756"
+           x="293.99591"
+           y="607.69635" />
+        <rect
+           style="fill:#73d216;fill-opacity:1;stroke:none"
+           id="rect3801"
+           width="123.91949"
+           height="30.051971"
+           x="1008.8647"
+           y="502.18253"
+           transform="matrix(0,1,-1,0,937.6742,-413.75756)"
+           ry="10.960131" />
+        <rect
+           style="fill:#73d216;fill-opacity:1;stroke:none"
+           id="rect3803"
+           width="123.91949"
+           height="30.051971"
+           x="594.88269"
+           y="-316.52618"
+           ry="10.960131"
+           transform="matrix(0,1,-1,0,0,0)" />
+      </g>
+    </a>
+    <a
+       id="use3538-9"
+       transform="matrix(0,-1,1,0,995.03686,1180.5136)">
+      <g
+         clip-path="url(#clipPath3082-0-3-9-1-9-4-4)"
+         transform="matrix(0,-1,1,0,285.7576,454.03638)"
+         id="g3807">
+        <rect
+           style="fill:#c17d11;fill-opacity:1;stroke:none"
+           id="rect3809"
+           width="137.3521"
+           height="132.88756"
+           x="293.99591"
+           y="607.69635" />
+        <rect
+           style="fill:#73d216;fill-opacity:1;stroke:none"
+           id="rect3811"
+           width="123.91949"
+           height="30.051971"
+           x="1008.8647"
+           y="502.18253"
+           transform="matrix(0,1,-1,0,937.6742,-413.75756)"
+           ry="10.960131" />
+        <rect
+           style="fill:#73d216;fill-opacity:1;stroke:none"
+           id="rect3813"
+           width="123.91949"
+           height="30.051971"
+           x="594.88269"
+           y="-316.52618"
+           ry="10.960131"
+           transform="matrix(0,1,-1,0,0,0)" />
+      </g>
+    </a>
+    <a
+       id="use3538-7"
+       transform="matrix(0,1,-1,0,1181.1145,-995.18822)">
+      <g
+         clip-path="url(#clipPath3082-0-3-9-1-9-4-4)"
+         transform="matrix(0,-1,1,0,285.7576,454.03638)"
+         id="g3817">
+        <rect
+           style="fill:#c17d11;fill-opacity:1;stroke:none"
+           id="rect3819"
+           width="137.3521"
+           height="132.88756"
+           x="293.99591"
+           y="607.69635" />
+        <rect
+           style="fill:#73d216;fill-opacity:1;stroke:none"
+           id="rect3821"
+           width="123.91949"
+           height="30.051971"
+           x="1008.8647"
+           y="502.18253"
+           transform="matrix(0,1,-1,0,937.6742,-413.75756)"
+           ry="10.960131" />
+        <rect
+           style="fill:#73d216;fill-opacity:1;stroke:none"
+           id="rect3823"
+           width="123.91949"
+           height="30.051971"
+           x="594.88269"
+           y="-316.52618"
+           ry="10.960131"
+           transform="matrix(0,1,-1,0,0,0)" />
+      </g>
+    </a>
+    <g
+       clip-path="url(#clipPath3082-0-0-0-6)"
+       transform="matrix(0,-1,1,0,285.6062,325.4354)"
+       id="g4890-0">
+      <rect
+         style="fill:#c17d11;fill-opacity:1;stroke:none"
+         id="rect4892-2"
+         width="137.3521"
+         height="132.88756"
+         x="293.99591"
+         y="607.69635" />
+      <rect
+         style="fill:#c17d11;fill-opacity:1;stroke:none"
+         id="rect3108-5"
+         width="119"
+         height="110"
+         x="629.93787"
+         y="-345.62375"
+         transform="matrix(0,1,-1,0,0,0)" />
+      <rect
+         transform="matrix(0,1,-1,0,0,0)"
+         y="-405.62375"
+         x="669.93787"
+         height="110"
+         width="119"
+         id="rect3106-1"
+         style="fill:#c17d11;fill-opacity:1;stroke:none" />
+      <rect
+         ry="40"
+         style="fill:#73d216;fill-opacity:1;stroke:none"
+         id="rect4894-9"
+         width="171.81995"
+         height="151.34155"
+         x="577.1178"
+         y="-446.9653"
+         transform="matrix(0,1,-1,0,0,0)" />
+      <rect
+         style="fill:#c17d11;fill-opacity:1;stroke:none"
+         id="rect4892-9-7"
+         width="35.125534"
+         height="36.489491"
+         x="281.39716"
+         y="718.84808"
+         ry="40" />
+    </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g4890-0"
+       id="use3692"
+       width="1"
+       height="1"
+       transform="matrix(0,1,-1,0,1180.3622,-995.63782)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g4890-0"
+       id="use3692-8"
+       width="1"
+       height="1"
+       transform="matrix(-1,0,0,-1,2176,184.72436)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g4890-0"
+       id="use3692-4"
+       width="1"
+       height="1"
+       transform="matrix(0,-1,1,0,995.63784,1180.3622)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g2868-1-8-0"
+       id="use3748"
+       width="1"
+       height="1"
+       transform="translate(896,1.5000001e-6)" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Gothic L;-inkscape-font-specification:URW Gothic L"
+       x="970.25745"
+       y="78.562111"
+       id="text3791"
+       sodipodi:linespacing="125%"
+       transform="translate(0,-227.63782)"><tspan
+         sodipodi:role="line"
+         id="tspan3793"
+         x="970.25745"
+         y="78.562111">Path to Area</tspan></text>
+    <g
+       clip-path="url(#clipPath3082-0-3-9-1-9-4-7)"
+       transform="matrix(0,-1,1,0,285.6062,453.43542)"
+       id="g3196">
+      <rect
+         style="fill:#c17d11;fill-opacity:1;stroke:none"
+         id="rect3198"
+         width="137.3521"
+         height="132.88756"
+         x="293.99591"
+         y="607.69635" />
+      <rect
+         style="fill:#73d216;fill-opacity:1;stroke:none"
+         id="rect3448"
+         width="123.91949"
+         height="30.051971"
+         x="1008.8647"
+         y="502.18253"
+         transform="matrix(0,1,-1,0,937.6742,-413.75756)"
+         ry="10.960131" />
+      <rect
+         style="fill:#73d216;fill-opacity:1;stroke:none"
+         id="rect3448-2"
+         width="123.91949"
+         height="30.051971"
+         x="594.88269"
+         y="-316.52618"
+         ry="10.960131"
+         transform="matrix(0,1,-1,0,0,0)" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Gothic L;-inkscape-font-specification:URW Gothic L Book"
+       x="640.00281"
+       y="1820.3622"
+       id="text3904"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="640.00281"
+         y="1820.3622"
+         id="tspan3908">Keep in mind that tile positioning will change in the future.</tspan><tspan
+         sodipodi:role="line"
+         x="640.00281"
+         y="1870.3622"
+         id="tspan3912">Once I've gotten some feedback, I'll finalize their positions.</tspan></text>
+  </g>
+</svg>
