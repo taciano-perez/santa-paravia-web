@@ -8,4 +8,5 @@ This Javascript implementation is mostly based on the [C implementation by Thoma
 I have kept the game interaction mechanics, but the UI and look & feel have been redesigned.
 
 # Resources
-- The free art comes from [IconsPNG](https://www.iconspng.com/image/109227/rpg-map-symbols-village) and [svgrepo](https://www.svgrepo.com/svg/46671/scroll)
+- The open game art comes from [Nicu's Clipart Collection](http://clipart.nicubunu.ro/?gallery=rpg_map).
+- The font is [Vecna](https://www.pixelsagas.com/?download=vecna) by Neale Davidson.
