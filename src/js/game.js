@@ -66,7 +66,7 @@ class Player {
         else
             this.Title = FemaleTitles[titleLevel];
 
-        this.Treasury = 100000;   // FIXME: start with 1000
+        this.Treasury = 1000;
         this.WhichPlayer = cityIndex;
         this.Year = _year;
         this.YearOfDeath = _year + 20 + Random(35);        
@@ -603,6 +603,8 @@ const changeText = function(words) {
 const changeImage = function(img) {
     if (img !== null && img !== undefined) {
         images.style.backgroundImage = "url(" + img + ")";
+        images.style.backgroundImage.width = 256;
+        images.style.backgroundImage.height = 256;
         images.hidden = false;
     } else {
         images.hidden = true;
@@ -1191,18 +1193,7 @@ const screens = {
     You are the ruler of a 15th century Italian city-state. 
     If you rule well, you will receive higher titles. The 
     first player to become king or queen wins. Life expectancy 
-    then was brief, so you may not live long enough to win. 
-    The computer will draw a map of your state. The size 
-    of the area in the wall grows as you buy more land. The 
-    size of the guard tower in the upper left corner shows 
-    the adequacy of your defenses. If it shrinks, equip more 
-    soldiers! If the horse and plowman is touching the top of the wall, 
-    all your land is in production. Otherwise you need more 
-    serfs, who will migrate to your state if you distribute 
-    more grain than the minimum demand. If you distribute less 
-    grain, some of your people will starve, and you will have 
-    a high death rate. High taxes raise money, but slow down 
-    economic growth.`,
+    then was brief, so you may not live long enough to win.`,
     buttons: [["Continue", "advanceTo(screens.difficulty)"]]
   },
   difficulty: {
@@ -1280,7 +1271,7 @@ const screens = {
   },
   adjustTax: {
     preprocess: "GenerateIncome(player)",
-    image: "./img/townhall.svg",
+    image: "./img/townhall_big.svg",
     text: () => screenAdjustTaxText(),
     buttons: [
         ["Customs Duty", "advanceTo(screens.customsDuty)"],
