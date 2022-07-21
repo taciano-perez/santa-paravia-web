@@ -1,5 +1,5 @@
 # Santa Paravia e Fiumaccio (Web Version)
-Web Game inspired by the classic BASIC game Santa Paravia e Fiumaccio.
+Web Game inspired by the classic BASIC game Santa Paravia e Fiumaccio. [Play the game.](https://taciano-perez.github.io/santa-paravia-web/)
 
 The original BASIC game for the TRS-80 was created by George Blank (1978) and published on [SoftSide Magazine](https://archive.org/details/softside-magazine-03/page/n7/mode/2up?view=theater).
 
