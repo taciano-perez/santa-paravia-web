@@ -5,7 +5,11 @@ The original BASIC game for the TRS-80 was created by George Blank (1978) and pu
 
 This Javascript implementation is mostly based on the [C implementation by Thomas Knox](https://github.com/darkf/paravia/blob/master/paravia.c) (2000).
 
-I have kept the game interaction mechanics, but the UI and look & feel have been redesigned.
+I have kept the game interaction mechanics, but the UI and look & feel have been redesigned. I haven't added some features to the map, namely the castle with variable size and the farmer with the plow indicating the food production level, as I felt they would be awkward in this UI and add little to the game. Please let me know if you disagre...
+
+[This article](https://datadrivengamer.blogspot.com/2021/05/game-255-santa-paravia-and-fiumaccio.html) discusses strategies for playing the game.
+
+[This page](https://gamesnostalgia.com/story/166/the-fascinating-story-of-santa-paravia-and-fiumaccio) explores in detail the history of the game.
 
 # Resources
 - The open game art comes from [Nicu's Clipart Collection](http://clipart.nicubunu.ro/?gallery=rpg_map).
