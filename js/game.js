@@ -1,4 +1,4 @@
-/*
+4/*
 Santa Paravia e Fiumaccio
 -------------------------
 The original BASIC game for the TRS-80 was created by George Blank (1978)
@@ -30,6 +30,7 @@ CityList = ["Santa Paravia", "Fiumaccio", "Torricella", "Molinetto", "Fontanile"
 MaleTitles = ["Sir", "Baron", "Count", "Marquis", "Duke", "Grand Duke", "Prince", "* H.R.H. King"];
 FemaleTitles = ["Lady","Baroness","Countess", "Marquise","Duchess", "Grand Duchess", "Princess", "* H.R.H. Queen"];
 const SOLDIERS_PER_PLATOON = 20;
+const PLATOON_COST = 500;
 
 class Player {
     constructor(_year, cityIndex, _name, _isMale, titleLevel) {
@@ -336,7 +337,7 @@ const ReleaseGrain = function(player, HowMuch) {
         player.InvadeMe = true;
     }
 
-    if ((player.Land / 500) > player.Soldiers) {
+    if ((player.Land / PLATOON_COST) > player.Soldiers) {
         player.InvadeMe = true;
     }
 
@@ -369,7 +370,7 @@ const AttackNeighbor = function(me, Him) {
         deadsoldiers = Him.Soldiers - 15;
     Him.Soldiers -= deadsoldiers;
 
-    messages.push(`${Him.Title} ${Him.Name} loses ${deadsoldiers} soldiers in battle.`);
+    messages.push(`${Him.Title} ${Him.Name} loses ${deadsoldiers} soldier(s) in battle.`);
     return messages;
 }
 
@@ -383,7 +384,8 @@ const attackRounds = function(player) {
     var HowMany = Players.length;
     var messages = [];
     if (player.InvadeMe) {
-        for (var i = 0; i < HowMany; i++) {
+        var i;
+        for (i = 0; i < HowMany; i++) {
             if (i != player.WhichPlayer) {
                 if (Players[i].Soldiers > (player.Soldiers * 2.4)) {
                     const msgs = AttackNeighbor(Players[i], player);
@@ -392,8 +394,10 @@ const attackRounds = function(player) {
                 }
             }
         }
-        if (i != 9)
-            AttackNeighbor(Baron, Me);
+        if (i != 9) {
+            const msgs = AttackNeighbor(game.Baron, player);
+            messages = messages.concat(msgs);
+        }
     }
     setAttackMessages(messages);
 }
@@ -449,16 +453,16 @@ const adjustJustice = function(player, justice) {
 }
 
 const AddRevenue = function(player) {
-    this.Treasury += (this.JusticeRevenue + this.CustomsDutyRevenue);
-    this.reasury += (this.IncomeTaxRevenue + this.SalesTaxRevenue);
+    player.Treasury += (player.JusticeRevenue + player.CustomsDutyRevenue);
+    player.Treasury += (player.IncomeTaxRevenue + player.SalesTaxRevenue);
 
     // Penalize deficit spending.
-    if (this.Treasury < 0)
-        this.Treasury = Math.floor(this.Treasury * 1.5);
+    if (player.Treasury < 0)
+    player.Treasury = Math.floor(player.Treasury * 1.5);
 
     // Will a title make the creditors happy (for now)?
-    if (this.Treasury < (-10000 * this.TitleNum))
-        this.IsBankrupt = true;
+    if (player.Treasury < (-10000 * player.TitleNum))
+    player.IsBankrupt = player;
 }
 
 const SeizeAssets = function(player) {
@@ -516,13 +520,13 @@ const BuyCathedral = function(player) {
 }
 
 const BuySoldiers = function(player) {
-    if (player.Treasury < 500) {
+    if (player.Treasury < PLATOON_COST) {
         showError("Sire, your treasury can't afford that much!");
         return;
     }
     player.Soldiers += SOLDIERS_PER_PLATOON;
     player.Serfs -= SOLDIERS_PER_PLATOON;
-    player.Treasury -= 500;
+    player.Treasury -= PLATOON_COST;
 }
 
 const ChangeTitle = function(player) {
@@ -627,7 +631,6 @@ const getInputText = function(action) {
         input.value = "";   // clear field
         const listener = function(event) {
             if (event.key == "Enter" || event.keyCode == 13) {
-                debug("INPUT: " + input.value);
                 input.removeEventListener("keydown", listener); // avoid double trigger after enter
                 eval(action);
             }};
@@ -722,7 +725,7 @@ const buyGrain = function (value) {
     if (amount >= 0 && amount <= player.GrainReserve) {
         BuyGrain(player, amount);
     } else {
-        showError("Invalid amount.");
+        showError(`Sire, the amount ${amount} is not valid.`);
     }
 }
 
@@ -741,8 +744,10 @@ const sellGrain = function (value) {
     var amount = parseInt(value);
     if (amount >= 0 && amount <= player.GrainReserve) {
         SellGrain(player, amount);
+    } else if (amount < 0) {
+        showError(`Sire, we cannot sell ${amount} steres.`);
     } else {
-        showError("You don't have it.");
+        showError(`My lord, we don't have ${amount} steres to sell.`);
     }
 }
 
@@ -765,8 +770,12 @@ const buyLand = function (value) {
     var amount = parseInt(value);
     if (amount >= 0 && amount <= (player.Treasury / player.LandPrice)) {
         BuyLand(player, amount);
+    } else if (amount >= (player.Treasury / player.LandPrice)) {
+        showError(`Sire, you do not have enough gold florins to buy that much land. Your coffers afford at most ${Math.floor(player.Treasury / player.LandPrice)} hectares.`);
+    } else if (amount == 0) {
+        // do nothing
     } else {
-        showError("Invalid amount.");
+        showError("My lord, that amount is not valid.");
     }
 }
 
@@ -789,8 +798,12 @@ const sellLand = function (value) {
     var amount = parseInt(value);
     if (amount >= 0 && amount <= player.Land) {
         SellLand(player, amount);
+    } else if (amount ==0) {
+        // do nothing
+    } else if (amount < 0) {
+        showError("Sire, that amount is not valid.");
     } else {
-        showError("You can't sell that much.");
+        showError("My lord, you do not have that much land to sell.");
     }
 }
 
@@ -897,7 +910,7 @@ const screenJusticeText = function() {
     New justice:`;
 }
 
-const checkBankruptcy = function() {
+const checkBankruptcy = function(player) {
     AddRevenue(player);
     if (player.IsBankrupt) {
         advanceTo(screens.bankruptcy);
@@ -1265,7 +1278,7 @@ const screens = {
   },
   battle: {
     preprocess: "attackRounds(player)",
-    image: "./img/statue.svg",
+    image: "./img/battle.svg",
     text: () => screenBattleText(),
     buttons: [["Continue", "advanceTo(screens.adjustTax)"]]
   },
@@ -1278,7 +1291,7 @@ const screens = {
         ["Sales Tax", "advanceTo(screens.salesTax)"],
         ["Income Tax", "advanceTo(screens.incomeTax)"],
         ["Justice", "advanceTo(screens.justice)"],
-        ["Continue", "checkBankruptcy()"]
+        ["Continue", "checkBankruptcy(player)"]
     ]
   },
   customsDuty: {
