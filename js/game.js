@@ -1,4 +1,4 @@
-4/*
+/*
 Santa Paravia e Fiumaccio
 -------------------------
 The original BASIC game for the TRS-80 was created by George Blank (1978)
@@ -11,9 +11,10 @@ const debug = function(msg) {
     console.log(msg);
 }
 
-// returns a random integer between 0 and max
+// returns a random integer between 1 and max
 const Random = function(max) {
-    return Math.floor(Math.random() * max+1);
+    const rnd = Math.trunc(Math.random() * max+1);
+    return rnd;
 }
 
 const showError = function(msg) {
@@ -21,7 +22,7 @@ const showError = function(msg) {
 }
 
 const limit10 = function(num, denom) {
-    const val = Math.floor(num / denom);
+    const val = Math.trunc(num / denom);
     return (val > 10 ? 10 : val);
 }
 
@@ -105,7 +106,7 @@ var attackMessages = []     // list of messages concernings attacks on the curre
 // GAME FUNCTIONS
 
 const setDifficulty = function(l) {
-    level = l;
+    level = l+5;    // the original BASIC code uses difficulties from 6 to 10, this is key for balancing the game
     debug("Difficulty set to " + l);
 }
 
@@ -284,21 +285,27 @@ const ReleaseGrain = function(player, HowMuch) {
         if ((player.CustomsDuty + player.SalesTax) < 35)
             player.Merchants += Random(4);
 
-        if (player.IncomeTax < Random(28)) {
-            player.Nobles += Random(2);
-            player.Clergy += Random(3);
+        if (player.IncomeTax < Random(20)) {// typo in C version, should be 20 i.o. 28
+            player.Nobles += Random(2)-1;   // BASIC version is RND(2)-1
+            player.Clergy += Random(3)-1;   // BASIC version is RND(3)-1
         }
 
+        // bonus for large surplus
         if (HowMuch > Math.floor((player.GrainDemand * 1.3))) {
             zp = player.Serfs / 1000.0;
             z = (HowMuch - (player.GrainDemand)) / player.GrainDemand * 10.0;
             z *= (zp * Random(25));
             z += Random(40);
-            player.TransplantedSerfs = Math.floor(z);
+            if (z > 32000) z = 32000;   // from BASIC version
+            zp = Math.trunc(z);         // from BASIC version
+            z = Random(zp);             // from BASIC version
+            player.TransplantedSerfs = z;
             player.Serfs += player.TransplantedSerfs;
-            messages.push(`${player.TransplantedSerfs} serfs move to the city.`);
-            zp = z;
-            z = (zp * Random(100)) / 100;
+            messages.push(`${player.TransplantedSerfs} serfs move to your city.`);
+            zp = Math.trunc(z / 5);     // from BASIC version
+            z = Random(zp);             // from BASIC version
+            if (z < 1) z = 1;           // from BASIC version
+            //z = (zp * Random(100)) / 100; // from C version
             if (z > 50.0)
                 z = 50.0;
             player.Merchants += Math.floor(z);
@@ -331,7 +338,7 @@ const ReleaseGrain = function(player, HowMuch) {
     player.Treasury -= player.SoldierPay;
 
     messages.push(`You paid your soldiers ${player.SoldierPay} florins.`);
-    messages.push(`You have ${player.Serfs}  serfs in your city.`);
+    messages.push(`You have ${player.Serfs} serfs in your city.`);
 
     if ((player.Land / 1000) > player.Soldiers) {
         player.InvadeMe = true;
@@ -552,8 +559,8 @@ const CheckNewTitle = function (player) {
     Total += limit10(player.Soldiers, 50);
     Total += limit10(player.Clergy, 10);
     Total += limit10(player.Serfs, 2000);
-    Total += limit10(Math.floor(player.PublicWorks * 100.0), 500);
-    player.TitleNum = (Total / player.Difficulty) - player.Justice;
+    Total += limit10(Math.trunc(player.PublicWorks * 100.0), 500);
+    player.TitleNum = Math.trunc((Total / player.Difficulty) - player.Justice)-1; // C version did not truncate TitleNum, subtracted one because original BASIC largest title is 8
     
     if (player.TitleNum > 7)
         player.TitleNum = 7;
