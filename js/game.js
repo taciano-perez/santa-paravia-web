@@ -595,7 +595,6 @@ const endTurn = function(player) {
 // UI controls
 var playerStatus = document.getElementById("playerStatus");
 var images = document.getElementById("images"); 
-var map0 = document.getElementById("map0"); 
 var map = document.getElementById("map"); 
 var text = document.getElementById("text"); 
 var buttonBox = document.getElementById('buttonBox');
@@ -1037,6 +1036,43 @@ const ROAD_COL2 = NUM_TILES_PER_FIELD_HOR + 3;
 const ROAD_COL3 = (NUM_TILES_PER_FIELD_HOR * 2) + 3;
 const X_OFFSET = 3;
 
+const sources = {
+    img_grass: './img/grass-tile.svg',
+    img_road_vertical: './img/road-vertical.svg',
+    img_road_horizontal: './img/road-horizontal.svg',
+    img_tree02: './img/tree02.svg',
+    img_tree11: './img/tree11.svg',
+    img_hill: './img/hill6.svg',
+    img_marketplace: './img/warehouse.svg',
+    img_mill: './img/windmill.svg',
+    img_cathedral: './img/cathedral.svg',
+    img_cathedral_outline:'./img/cathedral_outline.svg',
+    img_palace_outline: './img/townhall_outline.svg',
+    img_palace: './img/townhall.svg',
+    img_tower: './img/tower_round.svg',
+    img_barracks: './img/tent.svg',
+}
+
+// ensures that all images are loaded before calling a callback
+// from http://www.java2s.com/Tutorials/HTML_CSS/HTML5_Canvas/0400__HTML5_Canvas_Image.htm
+function loadImages(sources, callback) {
+    var images = {};
+    var loadedImages = 0;
+    var numImages = 0;
+    for(const src in sources) {
+      numImages++;
+    }
+    for(const src in sources) {
+      images[src] = new Image();
+      images[src].onload = function() {
+        if(++loadedImages >= numImages) {
+          callback(images);
+        }
+      };
+      images[src].src = sources[src];
+    }
+  }
+
 const drawMap = function(player) {
     const ctx = map.getContext('2d');
     const ctx_terrain = ctx;
@@ -1050,150 +1086,99 @@ const drawMap = function(player) {
     const num_palace = Math.min(player.Palace, 10);
     const num_cathedral = Math.min(player.Cathedral, 10);
 
-    // grass
-    const img_grass = new Image();
-    img_grass.src = './img/grass-tile.svg';
-    img_grass.onload = function() {
+    loadImages(sources, function(images) {
+        // grass
         for (var i = 0; i < 6; i++) {
             for (var j = 0; j < 13; j++) {
-                ctx_terrain.drawImage(img_grass, j * TILE_WIDTH, i * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+                ctx_terrain.drawImage(images.img_grass, j * TILE_WIDTH, i * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
             }
         }
-    };
-
-    // roads
-    const img_road_vertical = new Image();
-    img_road_vertical.src = './img/road-vertical.svg';
-    img_road_vertical.onload = function() {
+        // roads
         for (var i = 0; i < 6; i++) {
-            ctx_terrain.drawImage(img_road_vertical, ROAD_COL1 * TILE_WIDTH, i * TILE_HEIGHT, ROAD_WIDTH, ROAD_HEIGHT);
-            ctx_terrain.drawImage(img_road_vertical, ROAD_COL2 * TILE_WIDTH, i * TILE_HEIGHT, ROAD_WIDTH, ROAD_HEIGHT);
+            ctx_terrain.drawImage(images.img_road_vertical, ROAD_COL1 * TILE_WIDTH, i * TILE_HEIGHT, ROAD_WIDTH, ROAD_HEIGHT);
+            ctx_terrain.drawImage(images.img_road_vertical, ROAD_COL2 * TILE_WIDTH, i * TILE_HEIGHT, ROAD_WIDTH, ROAD_HEIGHT);
         }
-    }
-
-    const img_road_horizontal = new Image();
-    img_road_horizontal.src = './img/road-horizontal.svg';
-    img_road_horizontal.onload = function() {
         for (var i = 0; i < 13; i++) {
-            ctx_terrain.drawImage(img_road_horizontal, i * TILE_WIDTH, 3 * TILE_HEIGHT, TILE_WIDTH, ROAD_WIDTH);
+            ctx_terrain.drawImage(images.img_road_horizontal, i * TILE_WIDTH, 3 * TILE_HEIGHT, TILE_WIDTH, ROAD_WIDTH);
         }
-    }
-
-    // FIXME: hack to force rendering of the terrain before buildings
-    ctx.save();
-    ctx.restore();
-
-    // marketplace trees
-    const img_tree = new Image();
-    img_tree.src = './img/tree02.svg';
-    img_tree.onload = function() {
+        // marketplace trees
         for (var j = 0; j < NUM_TILES_PER_FIELD_HOR; j++) {
-            ctx.drawImage(img_tree, j * TILE_WIDTH, 0, TILE_WIDTH, TILE_HEIGHT);
+            ctx.drawImage(images.img_tree02, j * TILE_WIDTH, 0, TILE_WIDTH, TILE_HEIGHT);
         }
-    };
-
-    // marketplace
-    const img_marketplace = new Image();
-    img_marketplace.src = './img/warehouse.svg';
-    img_marketplace.onload = function() {
-      var marketplace_count = 0;
-      for (var i = 1; i < NUM_TILES_PER_FIELD_VER; i++) {
-        for (var j = 0; j < NUM_TILES_PER_FIELD_HOR; j++) {
-            if (++marketplace_count > num_marketplaces) break;
-            ctx.drawImage(img_marketplace, j * TILE_WIDTH, i * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+        // marketplaces
+        var marketplace_count = 0;
+        for (var i = 1; i < NUM_TILES_PER_FIELD_VER; i++) {
+            for (var j = 0; j < NUM_TILES_PER_FIELD_HOR; j++) {
+                if (++marketplace_count > num_marketplaces) break;
+                ctx.drawImage(images.img_marketplace, j * TILE_WIDTH, i * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+            }
         }
-      }
-    };
-
-    // mill
-    const img_mill = new Image();
-    img_mill.src = './img/windmill.svg';
-    const mill_x_offset = 0;
-    const mill_y_offset = BUILDING_HEIGHT;
-    img_mill.onload = function() {
-      var mill_count = 0;
-      for (var i = 1; i < NUM_TILES_PER_FIELD_VER; i++) {
-        for (var j = 0; j < NUM_TILES_PER_FIELD_HOR; j++) {
-            if (++mill_count > num_mills) break
-            ctx.drawImage(img_mill, mill_x_offset + j * TILE_WIDTH, mill_y_offset + i * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+        // mills
+        const mill_x_offset = 0;
+        const mill_y_offset = BUILDING_HEIGHT;
+        var mill_count = 0;
+        for (var i = 1; i < NUM_TILES_PER_FIELD_VER; i++) {
+          for (var j = 0; j < NUM_TILES_PER_FIELD_HOR; j++) {
+              if (++mill_count > num_mills) break
+              ctx.drawImage(images.img_mill, mill_x_offset + j * TILE_WIDTH, mill_y_offset + i * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+          }
         }
-      }
-    };
-
-    // cathedral
-    const cathedral_x_offset = TILE_WIDTH * ROAD_COL1;
-    const cathedral_y_offset = 0;
-    if (num_cathedral > 0) {
-        drawBuilding(ctx, './img/cathedral_outline.svg', './img/cathedral.svg', cathedral_x_offset, cathedral_y_offset, num_cathedral);
-    } else {
-        drawBuilding(ctx, './img/hill6.svg', './img/hill6.svg', cathedral_x_offset, cathedral_y_offset, MAX_PARTS);
-    }
-
-    // palace
-    const palace_x_offset = TILE_WIDTH * ROAD_COL1;
-    const palace_y_offset = BUILDING_HEIGHT;
-    if (num_palace > 0) {
-        drawBuilding(ctx, './img/townhall_outline.svg', './img/townhall.svg', palace_x_offset, palace_y_offset, num_palace);
-    } else {
-        drawBuilding(ctx, './img/tree11.svg', './img/tree11.svg', palace_x_offset, palace_y_offset, MAX_PARTS);
-    }
-
-    // barracks fortifications
-    const img_tower = new Image();
-    img_tower.src = './img/tower_round.svg';
-    img_tower.onload = function() {
-        ctx.drawImage(img_tower, (ROAD_COL2 + 2) * TILE_WIDTH, 0, TILE_WIDTH, TILE_HEIGHT);
-    };
-
-    // barracks
-    const img_barracks = new Image();
-    img_barracks.src = './img/tent.svg';
-    const barracks_x_offset = TILE_WIDTH * ROAD_COL2;
-    const barracks_y_offset = TILE_HEIGHT;
-    img_barracks.onload = function() {
+        // cathedral
+        const cathedral_x_offset = TILE_WIDTH * ROAD_COL1;
+        const cathedral_y_offset = 0;
+        if (num_cathedral > 0) {
+            drawBuilding(ctx, images.img_cathedral_outline, images.img_cathedral, cathedral_x_offset, cathedral_y_offset, num_cathedral);
+        } else {
+            drawBuilding(ctx, images.img_hill, images.img_hill, cathedral_x_offset, cathedral_y_offset, MAX_PARTS);
+        }
+        // palace
+        const palace_x_offset = TILE_WIDTH * ROAD_COL1;
+        const palace_y_offset = BUILDING_HEIGHT;
+        if (num_palace > 0) {
+            drawBuilding(ctx, images.img_palace_outline, images.img_palace, palace_x_offset, palace_y_offset, num_palace);
+        } else {
+            drawBuilding(ctx, images.img_tree11, images.img_tree11, palace_x_offset, palace_y_offset, MAX_PARTS);
+        }
+        // barracks fortifications
+        ctx.drawImage(images.img_tower, (ROAD_COL2 + 2) * TILE_WIDTH, 0, TILE_WIDTH, TILE_HEIGHT);
+        // barracks
+        const barracks_x_offset = TILE_WIDTH * ROAD_COL2;
+        const barracks_y_offset = TILE_HEIGHT;
         var barracks_count = 0;
         for (var i = 0; i < 5; i++) {
             for (var j = 0; j < NUM_TILES_PER_FIELD_HOR; j++) {
                 if (++barracks_count > num_barracks) break;
-                ctx.drawImage(img_barracks, (barracks_x_offset + j * TILE_WIDTH) + X_OFFSET, barracks_y_offset + i * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+                ctx.drawImage(images.img_barracks, (barracks_x_offset + j * TILE_WIDTH) + X_OFFSET, barracks_y_offset + i * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
             }
         }
-    };
+      });
 }
 
-const drawBuilding = function(ctx, img_outline_src, img_building_src, x_offset, y_offset, num_parts_built) {
+const drawBuilding = function(ctx, img_outline, img_building, x_offset, y_offset, num_parts_built) {
     x_offset += X_OFFSET;
     // outline
-    const img_outline = new Image();
-    img_outline.src = img_outline_src;
-    img_outline.onload = function() {
-        ctx.drawImage(img_outline, x_offset, y_offset, BUILDING_WIDTH, BUILDING_HEIGHT);
-    }
+    ctx.drawImage(img_outline, x_offset, y_offset, BUILDING_WIDTH, BUILDING_HEIGHT);
 
     // actual building
-    const img_building = new Image();
-    img_building.src = img_building_src;
-    img_building.onload = function() {
-        // source image coordinates for clipping
-        const sWidth = IMG_W;
-        const sHeight = (num_parts_built * (IMG_H / MAX_PARTS))
-        const sy = IMG_H - sHeight;
-        const sx = 0;
-        // target coordinates for drawing
-        const dWidth = BUILDING_WIDTH;
-        const dHeight = (num_parts_built * (BUILDING_HEIGHT / MAX_PARTS));
-        const dy = Math.floor(y_offset + (BUILDING_HEIGHT - dHeight));
-        const dx = x_offset;
-        ctx.drawImage(img_building,
-            sx,
-            sy,
-            sWidth,
-            sHeight,
-            dx,
-            dy,
-            dWidth,
-            dHeight);
-        }
+    // source image coordinates for clipping
+    const sWidth = IMG_W;
+    const sHeight = (num_parts_built * (IMG_H / MAX_PARTS))
+    const sy = IMG_H - sHeight;
+    const sx = 0;
+    // target coordinates for drawing
+    const dWidth = BUILDING_WIDTH;
+    const dHeight = (num_parts_built * (BUILDING_HEIGHT / MAX_PARTS));
+    const dy = Math.floor(y_offset + (BUILDING_HEIGHT - dHeight));
+    const dx = x_offset;
+    ctx.drawImage(img_building,
+        sx,
+        sy,
+        sWidth,
+        sHeight,
+        dx,
+        dy,
+        dWidth,
+        dHeight);
 }
 
 const hideMap = function() {
