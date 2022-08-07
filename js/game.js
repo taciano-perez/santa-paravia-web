@@ -3,7 +3,7 @@ Santa Paravia e Fiumaccio
 -------------------------
 The original BASIC game for the TRS-80 was created by George Blank (1978)
 This JS implementation by Taciano Dreckmann Perez (2022) is based on the
-C implementation by Thomas Knox (2000)
+C implementation by Thomas Knox (2000).
 */
 
 // CONVENIENCE FUNCTIONS
@@ -106,7 +106,7 @@ var attackMessages = []     // list of messages concernings attacks on the curre
 // GAME FUNCTIONS
 
 const setDifficulty = function(l) {
-    level = l+5;    // the original BASIC code uses difficulties from 6 to 10, this is key for balancing the game
+    level = l+5;    // the original BASIC code uses difficulties from 6 to 10, which is key for balancing the game
     debug("Difficulty set to " + l);
 }
 
@@ -700,17 +700,17 @@ const screenBuySellGrainText = function() {
     const harvestMsg = printHarvestMsg(player);
     return `
     <table>
-    <tr><td colspan=2>Rats ate ${player.Rats}% of your grain reserves.</td></tr>
-    <tr><td colspan=2>${harvestMsg} (${player.RatsAte} steres).</td></tr>
+    <tr><td colspan=5>Rats ate ${player.Rats}% of your grain reserves.</td></tr>
+    <tr><td colspan=5>${harvestMsg} (${player.RatsAte} steres).</td></tr>
     </table>
     &nbsp;<br>
-    <table>
+    <table class="center">
     <tr valign=bottom><td>Grain Reserve</td> <td>Grain Demand</td> <td>Price of Grain</td> <td>Price of Land</td> <td>Treasury</td></tr>  
     <tr valign=top><td>${player.GrainReserve.toFixed(0)} steres</td> <td>${player.GrainDemand} steres</td> <td>${player.GrainPrice.toFixed(2)} per 1000 st.</td> <td>${player.LandPrice.toFixed(2)} hectare</td> <td>${player.Treasury.toFixed(2)} gold florins</td></tr>
     </table>
     &nbsp;<br>
     <table>
-    <tr><td>You have ${player.Land} hectares of land.</td></tr>
+    <tr><td colspan=5>You have ${player.Land} hectares of land.</td></tr>
     </table>
     `;
 }
@@ -1357,9 +1357,3 @@ const screens = {
 input.hidden = true;
 map.hidden = true;
 advanceTo(screens.start);
-
-//TEMP
-// setDifficulty(2);
-// setRulerName("Brancaleone da Norcia");
-// startGame(true);
-// advanceTo(screens.newTurn);
