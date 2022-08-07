@@ -593,12 +593,13 @@ const endTurn = function(player) {
 // UI FUNCTIONS
 
 // UI controls
-var playerStatus = document.getElementById("playerStatus");
-var images = document.getElementById("images"); 
-var map = document.getElementById("map"); 
-var text = document.getElementById("text"); 
-var buttonBox = document.getElementById('buttonBox');
-var input = document.getElementById('inputText');
+const playerStatus = document.getElementById("playerStatus");
+const images = document.getElementById("images"); 
+const map = document.getElementById("map"); 
+const text = document.getElementById("text"); 
+const buttonBox = document.getElementById('buttonBox');
+const inputArea = document.getElementById('ïnputTextArea');
+const input = document.getElementById('inputText');
 
 // updates text based on the current screen
 const changeText = function(words) {
@@ -655,9 +656,9 @@ const getInputText = function(action) {
         };
         input.addEventListener("keydown", listener);    // enter key on PC keyboards
         input.addEventListener("focusout", listener);   // needed for iPhone virtual keyboard
-        input.hidden = false;
+        inputArea.hidden = false;
     } else {
-        input.hidden = true;
+        inputArea.hidden = true;
     }
 }
 
@@ -1368,6 +1369,6 @@ const screens = {
 };
 
 // start game
-input.hidden = true;
+inputArea.hidden = true;
 map.hidden = true;
 advanceTo(screens.start);
