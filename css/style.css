@@ -3,12 +3,17 @@
 	src: url('../font/Vecna-oppx.ttf'); 
 }
 
+.responsive {
+  max-width: 100%;
+  height: auto;
+}
+
 body {
     color: white;
     background-color: black;
     font-size: 1.6em;
-    margin-left: 30%;
-    margin-right:30%;
+    max-width: 780px;
+    margin: auto;
     font-family: "Vecna";
   }
   
@@ -48,6 +53,8 @@ body {
     font-family: "Vecna";
   }
 
-  table {
-    width: 100%;
+  table, th, td {
+    width: 100vw;
+    max-width: 780px;
+    border: 1px solid black;
   }
