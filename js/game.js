@@ -635,12 +635,26 @@ const changeButtons = function(buttonList) {
 const getInputText = function(action) {
     if (action !== null && action !== undefined) {
         input.value = "";   // clear field
+        const doIt = function(listener, action) {
+            // avoid double trigger
+            input.removeEventListener("keydown", listener);
+            input.removeEventListener("focusout", listener);
+            // perform action
+            eval(action);
+        }
         const listener = function(event) {
-            if (event.key == "Enter" || event.keyCode == 13) {
-                input.removeEventListener("keydown", listener); // avoid double trigger after enter
-                eval(action);
-            }};
-        input.addEventListener("keydown", listener);
+            if (event.type == "keydown") {
+                if (event.key == "Enter" || event.keyCode == 13) {
+                    doIt(listener, action);
+                } else {
+                    // ignore keys other than enter
+                }
+            } else if (event.type == "focusout") {
+                doIt(listener, action);
+            }
+        };
+        input.addEventListener("keydown", listener);    // enter key on PC keyboards
+        input.addEventListener("focusout", listener);   // needed for iPhone virtual keyboard
         input.hidden = false;
     } else {
         input.hidden = true;
