@@ -912,12 +912,12 @@ const screenAdjustTaxText = function() {
 }
 
 const screenCustomsDutyText = function() {
-    return `Sales Tax: ${player.CustomsDuty}%<br>
+    return `Customs Duty: ${player.CustomsDuty}%<br>
     New customs duty (0 to 100):`;
 }
 
 const screenSalesTaxText = function() {
-    return `Customs Duty: ${player.SalesTax}%<br>
+    return `Sales Tax: ${player.SalesTax}%<br>
     New sales tax (0 to 50):`;
 }
 
